@@ -6,6 +6,7 @@
     <title>חדר מספר 4: קרב נגד המוח - מסע בעקבות החנוכה</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        /* CSS נשאר ללא שינוי */
         * {
             margin: 0;
             padding: 0;
@@ -118,6 +119,8 @@
             border-radius: 8px;
             transition: all 0.3s;
             font-family: 'Heebo', sans-serif;
+            /* הוספת תמיכה בניקוד */
+            font-family: 'Heebo', sans-serif; 
         }
 
         .answer-input:focus {
@@ -222,141 +225,157 @@
 </head>
 <body>
     <div class="quiz-container">
-        <h1>חדר מספר 4: קרב נגד המוח - מסע בעקבות החנוכה</h1>
-        <p class="intro">הקלידו את הפתרון הנכון ליד כל חידה. יש למלא את כל 21 החידות כדי לשלב הבא!</p>
+        <h1>חֲדַר מִסְפָּר 4: קְרָב נֶגֶד הַמּוֹחַ - מַסָּע בְּעִקְבוֹת הַחֲנֻכָּה</h1>
+        <p class="intro">הַקְלִידוּ אֶת הַפִּתְרוֹן הַנָּכוֹן לְיַד כָּל חִידָה. יֵשׁ לְמַלֵּא אֶת כָּל 21 הַחִידוֹת כְּדֵי לַעֲבֹר לַשָּׁלָב הַבָּא!</p>
 
         <form id="riddleForm">
             <table class="riddle-table">
                 <thead>
                     <tr>
-                        <th>אות</th>
-                        <th style="text-align: right;">החידה</th>
-                        <th>התשובה</th>
+                        <th>אוֹת</th>
+                        <th style="text-align: right;">הַחִידָה</th>
+                        <th>הַתְּשׁוּבָה</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>א'</td>
-                        <td>אחד השמות של חג החנוכה:</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="אורים" placeholder="" required></td>
+                        <td>אֶחָד מִשְּׁמוֹת חַג הַחֲנֻכָּה:</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="אורים" placeholder="אֳוּרִים" required></td>
                     </tr>
                     <tr>
                         <td>ב'</td>
-                        <td>איזו מצווה היווניים אסרו?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="בריתמילה" placeholder="" required></td>
+                        <td>אֵיזוֹ מִצְוָה הַיְּוָנִים אָסְרוּ?</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="בריתמילה" placeholder="בְּרִית מִילָה" required></td>
                     </tr>
                     <tr>
                         <td>ג'</td>
-                        <td>פעם הדליקו באבני צור והיום ב...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="גפרורים" placeholder=" " required></td>
+                        <td>פַּעַם הִדְלִיקוּ בְּאַבְנֵי צוּר וְהַיּוֹם בְּ...</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="גפרורים" placeholder="גַּפְרוּרִים" required></td>
                     </tr>
                     <tr>
                         <td>ד'</td>
-                        <td>משפחת החשמונאים היו מזרע בית </td>
-                        <td><input type="text" class="answer-input" data-correct-answer="דוד" placeholder=" " required></td>
+                        <td>מִשְׁפַּחַת הַחַשְׁמוֹנָאִים הָיוּ מִזֶּרַע בֵּית</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="דוד" placeholder="דָּוִד" required></td>
                     </tr>
                     <tr>
                         <td>ה'</td>
-                        <td>בחנוכה ניצחנו את...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="היוונים" placeholder="" required></td>
+                        <td>בַּחֲנֻכָּה נִצַּחְנוּ אֶת...</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="היוונים" placeholder="הַיְּוָנִים" required></td>
                     </tr>
                     <tr>
                         <td>ו'</td>
-                        <td>היום האחרון של חג החנוכה הוא:</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="וזאתחנוכה" placeholder="" required></td>
+                        <td>הַיּוֹם הָאַחֲרוֹן שֶׁל חַג הַחֲנֻכָּה הוּא:</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="זאתחנוכה" placeholder="וְזֹאת חֲנֻכָּה" required></td>
                     </tr>
                     <tr>
                         <td>ז'</td>
-                        <td>ממנו עשוי השמן בבית המקדש</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="זית" placeholder="" required></td>
+                        <td>מִמֶּנּוּ עָשׂוּי הַשֶּׁמֶן בְּבֵית הַמִּקְדָּשׁ</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="זית" placeholder="זַּיִת" required></td>
                     </tr>
                     <tr>
                         <td>ח'</td>
-                        <td>מי אלו שהובילו את המרד ביוונים?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="חשמונאים" placeholder="" required></td>
+                        <td>מִי אֵלּוּ שֶׁהוֹבִילוּ אֶת הַמֶּרֶד בַּיְּוָנִים?</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="חשמונאים" placeholder="חַשְׁמוֹנָאִים" required></td>
                     </tr>
                     <tr>
                         <td>ט'</td>
-                        <td>פך השמן היחידי שמצאו היה...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="טהור" placeholder="" required></td>
+                        <td>פַּךְ הַשֶּׁמֶן הַיְּחִידִי שֶׁמָּצְאוּ הָיָה...</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="טהור" placeholder="טָהוֹר" required></td>
                     </tr>
                     <tr>
                         <td>י'</td>
-                        <td>איך קראו למפקד במלחמה?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="יהודה" placeholder="" required></td>
+                        <td>אֵיךְ קָרְאוּ לַמְּפַקֵּד בַּמִּלְחָמָה?</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="יהודה" placeholder="יְהוּדָה" required></td>
                     </tr>
                     <tr>
                         <td>כ'</td>
-                        <td>תפקידו של מתתיהו בבית המקדש</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="כהןגדול" placeholder="" required></td>
+                        <td>תַּפְקִידוֹ שֶׁל מַתִּתְיָהוּ בְּבֵית הַמִּקְדָּשׁ</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="כהןגדול" placeholder="כֹּהֵן גָּדוֹל" required></td>
                     </tr>
                     <tr>
                         <td>ל'</td>
-                        <td>מה החשמונאים החליטו?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="להילחם" placeholder="" required></td>
+                        <td>מַה הַחַשְׁמוֹנָאִים הֶחְלִיטוּ?</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="להילחם" placeholder="לְהִלָּחֵם" required></td>
                     </tr>
                     <tr>
                         <td>מ'</td>
-                        <td>מנהיג המרד?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="מתתיהו" placeholder="" required></td>
+                        <td>מַנְהִיג הַמֶּרֶד?</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="מתתיהו" placeholder="מַתִּתְיָהוּ" required></td>
                     </tr>
                     <tr>
                         <td>נ'</td>
-                        <td>על פי השיר הוא דקיק</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="נר" placeholder="" required></td>
+                        <td>עַל פִּי הַשִּׁיר הוּא דַּקִּיק</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="נר" placeholder="נֵר" required></td>
                     </tr>
                     <tr>
                         <td>ס'</td>
-                        <td>אחד ממאכלי החנוכה</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="סופגניה" placeholder="" required></td>
+                        <td>אֶחָד מִמַּאֲכְלֵי הַחֲנֻכָּה</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="סופגניה" placeholder="סֻפְגָּנִיָּה" required></td>
                     </tr>
                     <tr>
                         <td>ע'</td>
-                        <td>מי היו הצבא החלש?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="עםישראל" placeholder="" required></td>
+                        <td>מִי הָיוּ הַצָּבָא הֶחָלָשׁ?</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="עםישראל" placeholder="עַם יִשְׂרָאֵל" required></td>
                     </tr>
                     <tr>
                         <td>פ'</td>
-                        <td>מטרת הדלקת החנוכיה</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="פרסוםהנס" placeholder="" required></td>
+                        <td>מַטְּרַת הַדְלָקַת הַחֲנֻכִּיָּה</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="פרסוםהנס" placeholder="פִּרְסוּם הַנֵּס" required></td>
                     </tr>
                     <tr>
                         <td>צ'</td>
-                        <td>רשעים ביד...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="צדיקים" placeholder="" required></td>
+                        <td>רְשָׁעִים בְּיַד...</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="צדיקים" placeholder="צַדִּיקִים" required></td>
                     </tr>
                     <tr>
                         <td>ק'</td>
-                        <td>במנורה של בית המקדש היו שבעה...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="קנים" placeholder="" required></td>
+                        <td>בַּמְּנוֹרָה שֶׁל בֵּית הַמִּקְדָּשׁ הָיוּ שִׁבְעָה...</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="קנים" placeholder="קָנִים" required></td>
                     </tr>
                     <tr>
                         <td>ר'</td>
-                        <td>מניחים את החנוכיה סמוך ל..</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="רחוב" placeholder=" " required></td>
+                        <td>מַנִּיחִים אֶת הַחֲנֻכִּיָּה סָמוּךְ לְ...</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="רחוב" placeholder="רְחוֹב" required></td>
                     </tr>
                     <tr>
                         <td>ש'</td>
-                        <td>בחו"ל כתוב: נס גדול היה...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="שם" placeholder="" required></td>
+                        <td>בְּחוּץ לָאָרֶץ כָּתוּב: נֵס גָּדוֹל הָיָה...</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="שם" placeholder="שָׁם" required></td>
                     </tr>
                     <tr>
                         <td>ת'</td>
-                        <td>ועל הגבורות ועל ה...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="תשועות" placeholder="" required></td>
+                        <td>וְעַל הַגְּבוּרוֹת וְעַל הַ...</td>
+                        <td><input type="text" class="answer-input" data-correct-answer="תשועות" placeholder="תְּשׁוּעוֹת" required></td>
                     </tr>
                 </tbody>
             </table>
         </form>
 
-        <button type="button" id="checkAll">🤠לחצו עליי אם אתם חושבים שאתם יודעים🤠</button>
+        <button type="button" id="checkAll">🤠לַחֲצוּ עָלַי אִם אַתֶּם חוֹשְׁבִים שֶׁאַתֶּם יוֹדְעִים🤠</button>
         
         <div id="feedback"></div>
     </div>
 
     <script>
+        // *******************************************************************
+        // ** הגדרות ניתוב ו-GitHub Pages (אופציונלי)
+        // אם אתה מעלה לאתר רגיל, השאר את זה ככה
+        const REPO_NAME = 'hanukkah-escape'; 
+        const isGithubPages = window.location.hostname.endsWith('github.io');
+
+        function getPath(fileName) {
+            if (isGithubPages) {
+                // נתיב יחסי ל-GitHub Pages
+                return `/${REPO_NAME}/${fileName}`; 
+            }
+            // נתיב רגיל
+            return fileName; 
+        }
+        // *******************************************************************
+        
         // הקוד הסודי שמתקבל אם כל החידות נכונות (לצורך המעבר לשלב הבא)
-        const FINAL_SECRET_CODE = "הכלנכון"; 
+        const FINAL_SECRET_CODE = "נִפְתְּרָהַמַּעֲבָר";
         
         // שם הקובץ לשלב הבא
         const NEXT_LEVEL_FILE = 'חדר בריחה חנוכה 06.html'; 
@@ -370,15 +389,17 @@
             let incorrectCount = 0;
             
             // הסרת הקלאס show
-            feedbackElement.classList.remove('show');
+            feedbackElement.classList.remove('show', 'correct', 'incorrect');
             
             // איפוס סגנונות
             inputs.forEach(input => {
                 input.closest('tr').classList.remove('correct-answer-row');
+                input.style.borderColor = '#CC9900'; // איפוס לצבע ברירת מחדל
             });
 
             inputs.forEach(input => {
-                const userInput = input.value.trim().replace(/\s/g, '').toLowerCase(); // נירמול הקלט
+                // נירמול הקלט: הסרת רווחים, המרת הכל לאותיות קטנות, והסרת ניקוד (אם היה)
+                const userInput = input.value.trim().replace(/\s/g, '').toLowerCase().replace(/[\u0591-\u05BD\u05BF-\u05C7]/g, ""); 
                 const correctAnswer = input.dataset.correctAnswer.toLowerCase(); // נירמול התשובה הנכונה
 
                 if (userInput === '') {
@@ -399,19 +420,19 @@
             // הצגת משוב סופי
             setTimeout(() => {
                 if (unanswered > 0) {
-                    feedbackElement.innerHTML = `❌ יש לענות על כל החידות! נותרו ${unanswered} חידות ריקות.`;
+                    feedbackElement.innerHTML = `❌ יֵשׁ לַעֲנוֹת עַל כָּל הַחִידוֹת! נוֹתְרוּ ${unanswered} חִידוֹת רֵיקוֹת.`;
                     feedbackElement.className = 'incorrect show';
                 } else if (allCorrect) {
-                    feedbackElement.innerHTML = `🎉 אתם נהדרים! כל 21 החידות נכונות! ${FINAL_SECRET_CODE}!`;
+                    feedbackElement.innerHTML = `אַתֶּם נֶהֱדָרִים! כָּל 21 הַחִידוֹת נְכוֹנוֹת!`;
                     feedbackElement.className = 'correct show';
                     
                     // מעבר אוטומטי לשלב הבא
                     setTimeout(() => {
-                        window.location.href = ending_game.html;
-                    }, 2000);
+                        window.location.href = getPath(ending_game.html);
+                    }, 3000); 
 
                 } else {
-                    feedbackElement.innerHTML = `❌ **טעויות!** נותרו ${incorrectCount} אהממ...נראה שטעיתם, מה שלא נכון מסומן באדום. נסו שוב.`;
+                    feedbackElement.innerHTML = `❌ **טְעֻיּוֹת!** נוֹתְרוּ ${incorrectCount} אֶהְמְמ... נִרְאֶה שֶׁטָּעִיתֶם, מַה שֶׁלֹּא נָכוֹן מְסֻמָּן בְּאָדֹם. נַסּוּ שׁוּב.`;
                     feedbackElement.className = 'incorrect show';
                 }
             }, 100);
