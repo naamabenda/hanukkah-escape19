@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חֲדַר בְּרִיחָה מַסָּע בְּעִקְבוֹת הַחֲנֻכָּה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS כללי נשאר זהה */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-image: url('https://i.imgur.com/wC315yU.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), inset 0 0 20px rgba(255, 215, 0, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.5), inset 0 0 30px rgba(255, 215, 0, 0.2); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5em;
+            color: #FFD700;
+            text-shadow: 0 0 30px #FFD700, 0 0 60px rgba(255, 215, 0, 0.5), 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 15px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #E6D8A2;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .instructions {
+            background: rgba(20, 15, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border: 3px solid #FFD700;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
+            animation: glow 4s ease-in-out infinite;
+        }
+
+        .instructions h2 {
+            color: #FFD700;
+            font-family: 'Cinzel', serif;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        .instructions p {
+            color: #E6D8A2;
+            font-size: 1.2em;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .puzzles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .puzzle-card {
+            background: rgba(20, 15, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border: 3px solid #CC9900;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .puzzle-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FFD700, #CC9900);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #1a1a2e;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
+            border: 3px solid rgba(0, 0, 0, 0.3);
+        }
+
+        .puzzle-question {
+            color: #fff;
+            font-size: 1.2em;
+            line-height: 1.7;
+            margin-top: 10px;
+            padding-right: 80px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .answer-input {
+            width: 100%;
+            max-width: 150px;
+            padding: 12px;
+            font-size: 1.8em;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #CC9900;
+            border-radius: 10px;
+            color: #FFD700;
+            font-weight: bold;
+            margin-top: 20px;
+            display: block;
+            transition: all 0.3s;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .answer-input::placeholder {
+            color: rgba(255, 215, 0, 0.4);
+            font-size: 0.9em;
+        }
+        
+        /* לא בשימוש כרגע, אך נשאר ב-CSS */
+        .answer-input.correct-answer {
+            border-color: #00FF00 !important;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5) !important;
+            color: #00FF00;
+        }
+
+        .answer-label {
+            color: #E6D8A2;
+            font-size: 1em;
+            margin-top: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .code-section {
+            background: rgba(20, 15, 10, 0.9);
+            backdrop-filter: blur(15px);
+            border: 4px solid #FFD700;
+            border-radius: 25px;
+            padding: 50px;
+            margin: 60px auto;
+            max-width: 700px;
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.5);
+            text-align: center;
+            animation: glow 4s ease-in-out infinite;
+        }
+
+        .code-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5em;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 1);
+        }
+
+        .code-subtitle {
+            color: #E6D8A2;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .code-input {
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+            font-size: 2em;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #CC9900;
+            border-radius: 15px;
+            color: #FFD700;
+            font-weight: bold;
+            letter-spacing: 10px;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .code-input::placeholder {
+            color: rgba(255, 215, 0, 0.3);
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, #CC9900, #FFD700);
+            color: #1a1a2e;
+            padding: 20px 60px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+            margin-top: 20px;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        .submit-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.7);
+        }
+
+        .submit-button:active {
+            transform: scale(0.95);
+        }
+
+        .feedback {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.3em;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .feedback.show {
+            opacity: 1;
+        }
+
+        .feedback.correct {
+            background: rgba(0, 255, 0, 0.2);
+            border: 3px solid #00FF00;
+            color: #00FF00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+        }
+
+        .feedback.incorrect {
+            background: rgba(255, 0, 0, 0.2);
+            border: 3px solid #FF0000;
+            color: #FF0000;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+        }
+
+        .progress-counter {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(20, 15, 10, 0.9);
+            border: 3px solid #FFD700;
+            border-radius: 15px;
+            padding: 15px 25px;
+            color: #FFD700;
+            font-size: 1.3em;
+            font-weight: bold;
+            z-index: 100;
+            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.2em;
+            }
+            
+            .puzzles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .code-section {
+                padding: 30px 20px;
+            }
+
+            .code-input {
+                font-size: 1.5em;
+                letter-spacing: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-counter">
+        <span>📜 חִידוֹת שֶׁהֻשְׁלְמוּ: <span id="filledCount">0</span>/10</span>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title"> חֲדַר בְּרִיחָה - מַסָּע בְּעִקְבוֹת הַחֲנֻכָּה </h1>
+            <p class="subtitle">חדר מספר 1</p>
+        </div>
+
+        <div class="instructions">
+            <h2>🔍 משימתכם, חוקרים יקרים</h2>
+            <p>לִפְנֵיכֶם 10 חִידוֹת מְרַתְּקוֹת עַל חַג הַחֲנֻכָּה. פָּתְרוּ כָּל חִידָה וְרָשְׁמוּ אֶת הַתְּשׁוּבוֹת. הַמַּעֲרֶכֶת תַּעֲקֹב אַחֲרֵי מִסְפַּר הַחִידוֹת שֶׁמִּלֵּאתֶם.</p>
+        </div>
+
+        <div class="puzzles-grid">
+            <div class="puzzle-card">
+                <div class="puzzle-number">1</div>
+                <div class="puzzle-question">כַּמָּה יְלָדִים הָיוּ לְחַנָּה?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer1" data-puzzle-id="1" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">2</div>
+                <div class="puzzle-question">כַּמָּה נֵרוֹת מַדְלִיקִים בַּיּוֹם הָרְבִיעִי שֶׁל חֲנֻכָּה?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer2" data-puzzle-id="2" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">3</div>
+                <div class="puzzle-question">אִם חֲבִילַת סֻפְגָּנִיּוֹת מְכִילָה 6 סֻפְגָּנִיּוֹת, אִמָּא קָנְתָה 3 חֲבִילוֹת וּבַסּוֹף אִמָּא נָתְנָה 11 סֻפְגָּנִיּוֹת לַשְּׁכֵנִים, כַּמָּה נִשְׁאַר?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer3" data-puzzle-id="3" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">4</div>
+                <div class="puzzle-question">בְּכָל כַּד שֶׁמֶן יֵשׁ 1 לִיטֶר שֶׁמֶן זַיִת זַךְ, כַּמָּה לִיטְרִים יֵשׁ בְּ-20 כַּדִּים? תּוֹרִידוּ מֵהַתּוֹצָאָה 12</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer4" data-puzzle-id="4" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">5</div>
+                <div class="puzzle-question">כַּמָּה אוֹתִיּוֹת יֵשׁ בִּסְבִיבוֹן? הִכְפִּילוּ כָּפוּל מִסְפַּר יְמֵי הַחַג!</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer5" data-puzzle-id="5" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">6</div>
+                <div class="puzzle-question">אִם מְחַלְּקִים 24 סֻפְגָּנִיּוֹת בֵּין 4 יְלָדִים כַּמָּה כָּל יֶלֶד מְקַבֵּל?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer6" data-puzzle-id="6" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">7</div>
+                <div class="puzzle-question">כַּמָּה נֵרוֹת מַדְלִיקִים בְּסַךְ הַכֹּל לְאֹרֶךְ כָּל יְמֵי חַג הַחֲנֻכָּה?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer7" data-puzzle-id="7" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">8</div>
+                <div class="puzzle-question">אִם קֻפְסַת גפרורים מְכִילָה 50 גפרורים, וּכְבָר הִשְׁתַּמְּשׁוּ בְּ-44 גפרורים בְּמֶשֶׁךְ כָּל הַחַג, כַּמָּה גפרורים נִשְׁאֲרוּ?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer8" data-puzzle-id="8" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">9</div>
+                <div class="puzzle-question">בַּחֲבִילַת נֵרוֹת יֵשׁ 80 נֵרוֹת, גַּיְא הִשְׁתַּמֵּשׁ בְּ-74 נֵרוֹת, כַּמָּה נִשְׁאַר לוֹ?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer9" data-puzzle-id="9" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">10</div>
+                <div class="puzzle-question">כַּמָּה יְלָדִים הָיוּ לְמַתִּתְיָהוּ הַכֹּהֵן?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer10" data-puzzle-id="10" placeholder="?">
+            </div>
+        </div>
+
+        <div class="code-section">
+            <h2 class="code-title">🔐 הַקּוֹד הַסּוֹדִי</h2>
+            <p class="code-subtitle">אָסְפוּ אֶת כָּל הַתְּשׁוּבוֹת שֶׁרְשַׁמְתֶּם לְפִי הַסֵּדֶר (1-10) וְכָתְבוּ אוֹתָן בְּרֶצֶף.</p>
+            <p class="code-subtitle" style="font-size: 0.95em; margin-top: 10px;">שִׂימוּ לֵב! רַק לְאַחַר שֶׁפְּתַרְתֶּם אֶת כָּל 10 הַחִידוֹת, הַקּוֹד הַסּוֹפִי יִהְיֶה נָכוֹן.</p>
+            <input type="text" id="finalCode" class="code-input" maxlength="12" placeholder="____________">
+            <button class="submit-button" onclick="checkFinalCode()">🔓 פְּתַח אֶת הַמַּנְעוּל</button>
+            <div id="feedback" class="feedback"></div>
+        </div>
+    </div>
+
+    <script>
+        const CORRECT_CODE = "757832644665";
+        const answers = {
+            1: "7",
+            2: "5", 
+            3: "7",
+            4: "8",
+            5: "32",
+            6: "6",
+            7: "44",
+            8: "6",
+            9: "6",
+            10: "5"
+        };
+
+        const correctPuzzles = {}; // משמש לבדיקה הסופית של הקוד
+        const filledPuzzles = {}; // משמש למונה העליון של "חידות שהושלמו"
+        const filledCountElement = document.getElementById('filledCount');
+        const totalPuzzles = 10;
+        
+        // פונקציה לעדכון מונה המשימות שהושלמו (לפי קלט)
+        function updateFilledCount() {
+            let count = 0;
+            for (const key in filledPuzzles) {
+                if (filledPuzzles[key] === true) {
+                    count++;
+                }
+            }
+            filledCountElement.textContent = count;
+        }
+
+        // פונקציית המענה המעודכנת: סופרת כל קלט מספרי
+        function checkPuzzle(event) {
+            const inputElement = event.target;
+            const puzzleNumber = inputElement.getAttribute('data-puzzle-id'); 
+            
+            const userAnswer = String(inputElement.value).trim();
+            const correctAnswer = answers[puzzleNumber];
+            
+            // 1. בדיקת מילוי (למונה העליון)
+            // האם יש קלט שהוא מספר (אפילו אם זה רק ספרה אחת)?
+            const isFilledWithNumber = (userAnswer.length > 0) && !isNaN(Number(userAnswer));
+            const wasFilled = filledPuzzles[puzzleNumber];
+            
+            if (isFilledWithNumber) {
+                if (!wasFilled) {
+                    filledPuzzles[puzzleNumber] = true;
+                    updateFilledCount();
+                }
+            } else {
+                if (wasFilled) {
+                    filledPuzzles[puzzleNumber] = false;
+                    updateFilledCount();
+                }
+            }
+
+            // 2. בדיקת נכונות (לצורך הקוד הסופי - שקטה)
+            const isCurrentlyCorrect = (userAnswer === correctAnswer);
+            if (isCurrentlyCorrect) {
+                 correctPuzzles[puzzleNumber] = true;
+            } else {
+                 correctPuzzles[puzzleNumber] = false;
+            }
+        }
+        
+        // פונקציה לבדיקת הקוד הסופי
+        function checkFinalCode() {
+            const userCode = document.getElementById('finalCode').value;
+            const feedback = document.getElementById('feedback');
+            
+            feedback.classList.remove('show');
+            
+            setTimeout(() => {
+                // סופר כמה חידות נכונות *באמת*
+                const totalCorrect = Object.keys(correctPuzzles).filter(key => correctPuzzles[key]).length;
+
+                if (totalCorrect < totalPuzzles) {
+                    // אם לא כל התשובות נכונות, גם אם הכל מלא
+                    feedback.textContent = `⚠️ ישנן חידות עם תשובות שגויות. בדקו את ${totalPuzzles - totalCorrect} החידות שנותרו.`;
+                    feedback.className = 'feedback incorrect show';
+                } else if (userCode.length !== 12) {
+                    feedback.textContent = "⚠️ הקוד חייב להיות בן 12 ספרות בדיוק!";
+                    feedback.className = 'feedback incorrect show';
+                } else if (userCode === CORRECT_CODE) {
+                    feedback.textContent = "כל הכבוד! הקוד נכון! הצלחתם לפענח את הקוד!";
+                    feedback.className = 'feedback correct show';
+                    
+                    document.body.style.animation = 'none';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'new_edit.html2.html';
+                    }, 2000);
+                } else {
+                    feedback.textContent = "❌ הקוד שגוי. בדקו שוב את החישובים ושסידרתם את התשובות לפי המספור הנכון (1-10)!";
+                    feedback.className = 'feedback incorrect show';
+                }
+            }, 100);
+        }
+
+        // חיבור ה-EventListener לכל תיבות הקלט לאחר טעינת הדף
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const answerInputs = document.querySelectorAll('.answer-input');
+            answerInputs.forEach(input => {
+                input.addEventListener('input', checkPuzzle);
+            });
+            
+            // חיבור Enter לבדיקת הקוד הסופי
+            document.getElementById('finalCode').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkFinalCode();
+                }
+            });
+
+            updateFilledCount(); 
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חדר בריחה חנוכה - ברוכים הבאים!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            min-height: 100vh;
+            
+            /* **תיקון: הסרת 'overflow: hidden;' או החלפה ל-'overflow-y: auto;' */
+            /* overflow: hidden; */ 
+            
+            position: relative;
+            background-image: url('https://i.imgur.com/wC315yU.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            /* **שינוי:** יישור תוכן לתחילת המסך כדי להתאים לגלילה */
+            align-items: flex-start; 
+            padding-top: 50px; /* ריפוד עליון כדי לרחק מהקצה */
+            padding-bottom: 50px; /* ריפוד תחתון */
+        }
+
+        /* אנימציות */
+        @keyframes fadeInScale {
+            from { 
+                opacity: 0; 
+                transform: scale(0.8) translateY(50px);
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% { 
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), inset 0 0 20px rgba(255, 215, 0, 0.1);
+                text-shadow: 0 0 30px #FFD700, 0 0 60px rgba(255, 215, 0, 0.5);
+            }
+            50% { 
+                box-shadow: 0 0 50px rgba(255, 215, 0, 0.7), inset 0 0 40px rgba(255, 215, 0, 0.2);
+                text-shadow: 0 0 40px #FFD700, 0 0 80px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* כוכבים נוצצים */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: sparkle 3s infinite;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            width: 90%;
+            /* ה-container לא צריך להיות בגובה 100% כדי לאפשר גלילה טבעית */
+        }
+
+        .welcome-box {
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(20px);
+            border: 5px double #FFD700;
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow: 0 30px 100px rgba(255, 215, 0, 0.6), inset 0 0 40px rgba(112, 93, 58, 0.3);
+            animation: fadeInScale 1.5s ease-out, glow 4s ease-in-out infinite;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .logo-icon {
+            font-size: 5em;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5em;
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #E6D8A2;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .description {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .description p {
+            color: #E6D8A2;
+            font-size: 1.2em;
+            line-height: 1.8;
+            text-align: center;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .description strong {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .input-section {
+            margin: 40px 0;
+        }
+
+        label {
+            display: block;
+            color: #FFD700;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        #playerName {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.5em;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: #FFD700;
+            border: 3px solid #CC9900;
+            border-radius: 15px;
+            font-family: 'Heebo', sans-serif;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        #playerName:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+            background: rgba(0, 0, 0, 0.85);
+        }
+
+        #playerName::placeholder {
+            color: rgba(255, 215, 0, 0.4);
+        }
+
+        .start-button {
+            width: 100%;
+            background: linear-gradient(135deg, #CC9900, #FFD700, #CC9900);
+            background-size: 200% 200%;
+            color: #1a1a2e;
+            padding: 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 2em;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+            font-family: 'Heebo', sans-serif;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .start-button:hover::before {
+            left: 100%;
+        }
+
+        .start-button:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.8);
+            background-position: 100% 0;
+        }
+
+        .start-button:active {
+            transform: scale(0.98);
+        }
+
+        .start-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .warning {
+            background: rgba(139, 0, 0, 0.3);
+            border: 2px solid #FF6B6B;
+            color: #FF6B6B;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.1em;
+            display: none;
+        }
+
+        .warning.show {
+            display: block;
+            animation: fadeInScale 0.5s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-box {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .subtitle {
+                font-size: 1.2em;
+            }
+
+            .description p {
+                font-size: 1em;
+            }
+
+            #playerName {
+                font-size: 1.2em;
+            }
+
+            .start-button {
+                font-size: 1.5em;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <div class="welcome-box">
+            <div class="logo">
+                <div class="logo-icon"></div>
+            </div>
+
+            <h1>חדר בריחה חנוכה</h1>
+            <p class="subtitle">מסע בעקבות חנוכה</p>
+
+            <div class="description">
+                <p><strong>ברוכים הבאים לחדר הבריחה המרתק!</strong></p>
+                <p>לפניכם מסע של 4 חדרים מלאי חידות, צפנים ואתגרים מרתקים על חג החנוכה.</p>
+                <p>⏱️ <strong>הטיימר יתחיל לספור מרגע שתלחצו "התחל"</strong></p>
+                <p>🏆 השחקן המהיר ביותר יזכה במקום הראשון בטבלת השיאים!</p>
+            </div>
+
+            <div class="input-section">
+                <label for="playerName">🎮 הזינו את שמכם:</label>
+                <input 
+                    type="text" 
+                    id="playerName" 
+                    placeholder="השם שלכם כאן..." 
+                    maxlength="20"
+                    autocomplete="off"
+                >
+            </div>
+
+            <button class="start-button" onclick="startGame()">
+                🚀 התחל את המסע!
+            </button>
+
+            <div class="warning" id="warning">
+                ⚠️ נא להזין שם לפני התחלת המשחק
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // יצירת כוכבים נוצצים
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        // מאזין ל-Enter
+        document.getElementById('playerName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                startGame();
+            }
+        });
+
+        // התחלת המשחק
+        async function startGame() {
+            const playerName = document.getElementById('playerName').value.trim();
+            const warning = document.getElementById('warning');
+
+            if (!playerName) {
+                warning.classList.add('show');
+                setTimeout(() => warning.classList.remove('show'), 3000);
+                return;
+            }
+
+            // שמירת שם השחקן
+            try {
+                // הממשק window.storage לא קיים בדפדפן רגיל, נשתמש ב-localStorage כברירת מחדל
+                localStorage.setItem('playerName', playerName);
+                
+                // התחלת הטיימר
+                const startTime = Date.now();
+                localStorage.setItem('gameStartTime', startTime.toString());
+                
+                // מעבר לחדר הראשון
+                window.location.href = 'new_edit.html1.html';
+
+            } catch (error) {
+                console.error('Error starting game:', error);
+                // במקרה של כשל ב-localStorage (נדיר), עדיין מנסים לעבור עמוד
+                window.location.href = 'new_edit.html1.html';
+            }
+        }
+    </script>
+</body>
+</html>
