@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>חדר בריחה חנוכה - ברוכים הבאים!</title>
+    <title>חֶדֶר בְּרִיחָה חֲנֻכָּה - בְּרוּכִים הַבָּאִים!</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* CSS נשאר ללא שינוי */
         * {
             margin: 0;
             padding: 0;
@@ -15,10 +16,7 @@
         body {
             font-family: 'Heebo', sans-serif;
             min-height: 100vh;
-            
-            /* **תיקון: הסרת 'overflow: hidden;' או החלפה ל-'overflow-y: auto;' */
-            /* overflow: hidden; */ 
-            
+            overflow-x: hidden; 
             position: relative;
             background-image: url('https://i.imgur.com/wC315yU.png');
             background-size: cover;
@@ -26,13 +24,12 @@
             background-attachment: fixed;
             display: flex;
             justify-content: center;
-            /* **שינוי:** יישור תוכן לתחילת המסך כדי להתאים לגלילה */
             align-items: flex-start; 
-            padding-top: 50px; /* ריפוד עליון כדי לרחק מהקצה */
-            padding-bottom: 50px; /* ריפוד תחתון */
+            padding-top: 50px; 
+            padding-bottom: 50px;
         }
-
-        /* אנימציות */
+        
+        /* ... שאר ה-CSS שלך ... */
         @keyframes fadeInScale {
             from { 
                 opacity: 0; 
@@ -65,7 +62,6 @@
             50% { opacity: 1; }
         }
 
-        /* כוכבים נוצצים */
         .stars {
             position: fixed;
             width: 100%;
@@ -88,7 +84,6 @@
             z-index: 1;
             max-width: 800px;
             width: 90%;
-            /* ה-container לא צריך להיות בגובה 100% כדי לאפשר גלילה טבעית */
         }
 
         .welcome-box {
@@ -108,8 +103,14 @@
         }
 
         .logo-icon {
+            /* הוספת תוכן אמוג'י ב-CSS */
             font-size: 5em;
-            animation: glow 3s ease-in-out infinite;
+            color: #FFD700; 
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        .logo-icon::before {
+            content: '🔥';
         }
 
         h1 {
@@ -297,33 +298,31 @@
                 <div class="logo-icon"></div>
             </div>
 
-            <h1>חדר בריחה חנוכה</h1>
-            <p class="subtitle">מסע בעקבות חנוכה</p>
-
-            <div class="description">
-                <p><strong>ברוכים הבאים לחדר הבריחה המרתק!</strong></p>
-                <p>לפניכם מסע של 4 חדרים מלאי חידות, צפנים ואתגרים מרתקים על חג החנוכה.</p>
-                <p>⏱️ <strong>הטיימר יתחיל לספור מרגע שתלחצו "התחל"</strong></p>
-                <p>🏆 השחקן המהיר ביותר יזכה במקום הראשון בטבלת השיאים!</p>
+            <h1>חֶדֶר בְּרִיחָה חֲנֻכָּה</h1>
+            <p class="subtitle">מַסָּע בְּעִקְבוֹת הַחַג</p> <div class="description">
+                <p><strong>בְּרוּכִים הַבָּאִים לְחֶדֶר הַבְּרִיחָה הַמְּרַתֵּק!</strong></p>
+                <p>לִפְנֵיכֶם מַסָּע שֶׁל 4 חֲדָרִים, מְלֵאֵי חִידוֹת, צְפָנִים וְאֶתְגָּרִים מְרַתְּקִים עַל חַג הַחֲנֻכָּה.</p>
+                <p>⏱️ **הַטַּיְמֶר יַתְחִיל לִסְפּוֹר מֵרֶגַע שֶׁתִּלְחֲצוּ "הַתְחֵל".**</p>
+                <p>🏆 הַשַּׂחְקָן הַמָּהִיר בְּיוֹתֵר יִזְכֶּה בַּמָּקוֹם הָרִאשׁוֹן בְּטַבְלַת הַשִּׂיאִים!</p>
             </div>
 
             <div class="input-section">
-                <label for="playerName">🎮 הזינו את שמכם:</label>
+                <label for="playerName">🎮 הַזִּינוּ אֶת שִׁמְכֶם:</label>
                 <input 
                     type="text" 
                     id="playerName" 
-                    placeholder="השם שלכם כאן..." 
+                    placeholder="הַשֵּׁם שֶׁלָּכֶם כָּאן..." 
                     maxlength="20"
                     autocomplete="off"
                 >
             </div>
 
             <button class="start-button" onclick="startGame()">
-                🚀 התחל את המסע!
+                🚀 הַתְחֵל אֶת הַמַּסָּע!
             </button>
 
             <div class="warning" id="warning">
-                ⚠️ נא להזין שם לפני התחלת המשחק
+                ⚠️ נָא לְהַזִּין שֵׁם לִפְנֵי הַתְחָלַת הַמִּשְׂחָק.
             </div>
         </div>
     </div>
@@ -350,11 +349,29 @@
                 startGame();
             }
         });
+        
+        // *******************************************************************
+        // ** תיקון חובה: ודא שהשם הוא שם הריפוזיטורי המדויק שלך!
+        const REPO_NAME = 'hanukkah-escape'; // ** זה מה שאתה צריך לבדוק! **
+        // *******************************************************************
+        
+        const isGithubPages = window.location.hostname.endsWith('github.io');
+
+        function getPath(fileName) {
+            if (isGithubPages) {
+                return `/${REPO_NAME}/${fileName}`;
+            }
+            return fileName;
+        }
 
         // התחלת המשחק
         async function startGame() {
             const playerName = document.getElementById('playerName').value.trim();
             const warning = document.getElementById('warning');
+            
+            // היעד הוא הקובץ הבא שלך
+            const targetFileName = 'index.html1'; 
+            const nextHtmlPage = getPath(targetFileName); 
 
             if (!playerName) {
                 warning.classList.add('show');
@@ -362,22 +379,20 @@
                 return;
             }
 
-            // שמירת שם השחקן
             try {
-                // הממשק window.storage לא קיים בדפדפן רגיל, נשתמש ב-localStorage כברירת מחדל
-                localStorage.setItem('playerName', playerName);
+                // שמירת שם השחקן
+                localStorage.setItem('hanukkahEscapePlayer', playerName); // השתמשתי במפתח ייחודי
                 
                 // התחלת הטיימר
                 const startTime = Date.now();
                 localStorage.setItem('gameStartTime', startTime.toString());
                 
                 // מעבר לחדר הראשון
-                window.location.href = 'new_edit.html1.html';
+                window.location.href = new_edit.html1.html;
 
             } catch (error) {
                 console.error('Error starting game:', error);
-                // במקרה של כשל ב-localStorage (נדיר), עדיין מנסים לעבור עמוד
-                window.location.href = 'new_edit.html1.html';
+                window.location.href = new_edit.html1.html;
             }
         }
     </script>
