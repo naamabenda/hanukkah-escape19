@@ -6,6 +6,7 @@
     <title>חֲדַר בְּרִיחָה בְּעִקְבוֹת חַג הַחֲנֻכָּה שָׁלָב מִסְפָּר 4</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        /* CSS נשאר ללא שינוי */
         * {
             margin: 0;
             padding: 0;
@@ -163,30 +164,11 @@
         }
         
         #restart-button {
-            background: linear-gradient(135deg, #CC9900, #FFD700);
-            color: #1a1a2e;
-            border: none;
-            padding: 18px 50px;
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-top: 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            display: none;
-            transition: all 0.4s;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
-            font-family: 'Heebo', sans-serif;
+            /* הלחצן הזה כבר לא נחוץ אם עוברים אוטומטית */
+            display: none; 
         }
 
-        #restart-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.7);
-        }
-
-        #restart-button:active {
-            transform: scale(0.95);
-        }
-
+        /* Media Queries נשארים ללא שינוי */
         @media (max-width: 1024px) {
             .cards-grid {
                 grid-template-columns: repeat(5, 1fr);
@@ -235,15 +217,27 @@
 <body>
     <div class="game-container">
         <h1>חֶדֶר מִסְפָּר 3: זֻוּגוֹת נִסְתָּרִים - מַסָּע בְּעִקְבוֹת הַחֲנֻכָּה</h1>
-        <p class="intro">נִרְאֶה שֶׁאַתֶּם מַמָּשׁ חֲכָמִים אִם הִגַּעְתֶּם עַד לְכָאן... אַךְ שִׂימוּ לֵב זֶה עוֹד לֹא נִגְמַר וְהִגִּיעַ הַזְּמַן לַשָּׁלָב הַבָּא: מְצָא/י אֶת 15 הַזֻּוּגוֹת בַּזְּמַן הַקָּצָר בְּיוֹתֵר. הַחֻקִּים הֵם פְּשׁוּטִים: הַתְאִימוּ אֶת הַתְּשׁוּבָה אֶל הַחִידָה וְהַשְׁלִימוּ אֶת הַמְּשִׂימָה!</p>
+        <p class="intro">נִרְאֶה שֶׁאַתֶּם מַמָּשׁ חֲכָמִים אִם הִגַּעְתֶּם עַד לְכָאן... אַךְ שִׂימוּ לֵב, זֶה עוֹד לֹא נִגְמַר וְהִגִּיעַ הַזְּמַן לַשָּׁלָב הַבָּא: מְצָא/י אֶת 15 הַזֻּוּגוֹת בַּזְּמַן הַקָּצָר בְּיוֹתֵר. הַחֻקִּים הֵם פְּשׁוּטִים: הַתְאִימוּ אֶת הַתְּשׁוּבָה אֶל הַחִידָה וְהַשְׁלִימוּ אֶת הַמְּשִׂימָה!</p>
 
         <div class="cards-grid" id="cards-grid"></div>
 
         <div id="feedback">...מְחַכִּים לַקְּלָף הָרִאשׁוֹן...</div>
-        <button id="restart-button">הַתְחִילוּ מִשְׂחָק חָדָשׁ</button>
-    </div>
+        </div>
 
     <script>
+        // *******************************************************************
+        // ** הגדרות ניתוב ו-GitHub Pages (חובה!)
+        const REPO_NAME = 'hanukkah-escape'; 
+        const isGithubPages = window.location.hostname.endsWith('github.io');
+
+        function getPath(fileName) {
+            if (isGithubPages) {
+                return `/${REPO_NAME}/${fileName}`;
+            }
+            return fileName;
+        }
+        // *******************************************************************
+
         const cardPairs = [
             { id: 1, content: "פַּךְ קָטָן" },
             { id: 1, content: "הִסְפִּיק לִשְׁמוֹנָה יָמִים בִּלְבַד" },
@@ -267,7 +261,7 @@
             { id: 10, content: "פִּיּוּט הַנֶּאֱמָר לְאַחַר הַהַדְלָקָה" },
             { id: 11, content: "מַכַּבִּים" }, 
             { id: 11, content: "הַכִּנּוּי שֶׁל לוֹחֲמֵי הַמֶּרֶד" }, 
-            { id: 12, content: "בֵּית הַמִּקְדָּשׁ" }, // תוקן לרבים, אך תוכן ההתאמה תומך גם ביחיד
+            { id: 12, content: "בֵּית הַמִּקְדָּשׁ" }, 
             { id: 12, content: "הַמָּקוֹם בּוֹ נִמְצָא פַּךְ הַשֶּׁמֶן" },
             { id: 13, content: "לְבִיבָה" },
             { id: 13, content: "מַאֲכָל מְטֻגָּן הַנֶּאֱכָל בֶּחָג" },
@@ -284,7 +278,7 @@
         const totalMatches = cardPairs.length / 2;
         const gridElement = document.getElementById('cards-grid');
         const feedbackElement = document.getElementById('feedback');
-        const restartButton = document.getElementById('restart-button');
+        // const restartButton = document.getElementById('restart-button'); // הוסר
 
         function shuffle(array) {
             let currentIndex = array.length, randomIndex;
@@ -303,7 +297,7 @@
             lockBoard = false;
             matchesFound = 0;
             feedbackElement.textContent = '...מְחַכִּים לַקְּלָף הָרִאשׁוֹן...';
-            restartButton.style.display = 'none';
+            // restartButton.style.display = 'none'; // הוסר
 
             const cardsArray = shuffle([...cardPairs]); 
             gridElement.innerHTML = '';
@@ -366,8 +360,16 @@
                 resetBoard();
                 
                 if (matchesFound === totalMatches) {
-                    feedbackElement.innerHTML = `🎉 כָּל הַכָּבוֹד! מְצָאתֶם אֶת כָּל ${totalMatches} הַזֻּוּגוֹת!`;
-                    restartButton.style.display = 'block';
+                    // ********************************************
+                    // ** לוגיקת סיום השלב ומעבר לעמוד הבא
+                    // ********************************************
+                    feedbackElement.innerHTML = `🎉 כָּל הַכָּבוֹד! מְצָאתֶם אֶת כָּל ${totalMatches} הַזֻּוּגוֹת! עוֹבְרִים לַחֲדַר הַסִּיּוּם...`;
+                    
+                    // עובר לעמוד הסיום לאחר 3 שניות
+                    setTimeout(() => {
+                        window.location.href = getPath('new_edit.html4.html');
+                    }, 3000); 
+
                 } else {
                     feedbackElement.textContent = `✅ נִמְצָא זוג! נוֹתְרוּ עוֹד ${totalMatches - matchesFound} זֻוּגוֹת.`;
                 }
@@ -387,9 +389,10 @@
             [firstCard, secondCard, lockBoard] = [null, null, false];
         }
 
-        restartButton.addEventListener('click', createBoard);
+        // restartButton.addEventListener('click', createBoard); // הוסר
 
         createBoard();
     </script>
 </body>
+
 </html>
