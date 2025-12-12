@@ -349,8 +349,8 @@
             }
         });
         
-        // ✅ תיקון: שם הריפוזיטורי - שנה לשם הריפוזיטורי שלך
-        const REPO_NAME = 'hanukkah-escape'; 
+        // ✅ שם הריפוזיטורי שלך ב-GitHub
+        const REPO_NAME = 'hanukkah-escape19'; 
         
         const isGithubPages = window.location.hostname.endsWith('github.io');
 
@@ -365,17 +365,12 @@
         function startGame() {
             const playerName = document.getElementById('playerName').value.trim();
             const warning = document.getElementById('warning');
-            const button = document.querySelector('.start-button');
 
             if (!playerName) {
                 warning.classList.add('show');
                 setTimeout(() => warning.classList.remove('show'), 3000);
                 return;
             }
-
-            // הצגת הודעה זמנית לבדיקה
-            button.textContent = '✅ המשחק מתחיל...';
-            button.disabled = true;
 
             // שמירת שם השחקן ב-localStorage
             localStorage.setItem('hanukkahEscapePlayer', playerName); 
@@ -384,17 +379,12 @@
             const startTime = Date.now();
             localStorage.setItem('gameStartTime', startTime.toString());
             
-            console.log('שם שחקן נשמר:', playerName);
-            console.log('זמן התחלה:', startTime);
+            // ✅ תיקון: שם הקובץ המדויק שלך ב-GitHub
+            const targetFileName = 'new_edit1.html';
+            const nextHtmlPage = getPath(targetFileName); 
             
-            // ⚠️ כרגע אין עמוד הבא - תחליפי את השורה הזו בכתובת הנכונה
-            alert(`שלום ${playerName}! המשחק יתחיל כשתיצרי את קובץ החדר הבא.\n\nהשם שלך נשמר בהצלחה! ✅`);
-            
-            // כשיהיה לך קובץ חדר ראשון, החליפי את השורה למטה:
-            // window.location.href = 'new_edit.html1.html';
-            
-            button.textContent = '🚀 התחל את המסע!';
-            button.disabled = false;
+            // מעבר לעמוד הבא
+            window.location.href = nextHtmlPage;
         }
     </script>
 </body>
