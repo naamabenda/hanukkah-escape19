@@ -6,7 +6,6 @@
     <title>חֲדַר בְּרִיחָה מַסָּע בְּעִקְבוֹת הַחֲנֻכָּה</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* כל ה-CSS המקורי שלך – בלי שום שינוי */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Heebo', sans-serif;
@@ -122,6 +121,7 @@
             animation: glow 4s ease-in-out infinite;
         }
         .code-title { font-family: 'Cinzel', serif; font-size: 2.5em; color: #FFD700; margin-bottom: 20px; text-shadow: 0 0 30px rgba(255, 215, 0, 1); }
+        .code-subtitle { color: #E6D8A2; font-size: 1.1em; margin-bottom: 30px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
         .code-input {
             width: 100%; max-width: 450px;
             padding: 20px;
@@ -163,7 +163,7 @@
 </head>
 <body>
     <div class="progress-counter">
-        חִידוֹת שֶׁהֻשְׁלְמוּ: <span id="filledCount">0</span>/10
+        <span>חִידוֹת שֶׁהֻשְׁלְמוּ: <span id="filledCount">0</span>/10</span>
     </div>
 
     <div class="container">
@@ -178,26 +178,81 @@
         </div>
 
         <div class="puzzles-grid">
-            <!-- כל 10 החידות בדיוק כמו שהיו אצלך במקור -->
             <div class="puzzle-card">
                 <div class="puzzle-number">1</div>
                 <div class="puzzle-question">כַּמָּה יְלָדִים הָיוּ לְחַנָּה?</div>
                 <div class="answer-label">התשובה שלי:</div>
-                <input type="text" class="answer-input" data-id="1" placeholder="?">
+                <input type="text" class="answer-input" id="answer1" data-id="1" placeholder="?">
             </div>
+
             <div class="puzzle-card">
                 <div class="puzzle-number">2</div>
                 <div class="puzzle-question">כַּמָּה נֵרוֹת מַדְלִיקִים בַּיּוֹם הָרְבִיעִי שֶׁל חֲנֻכָּה?</div>
                 <div class="answer-label">התשובה שלי:</div>
-                <input type="text" class="answer-input" data-id="2" placeholder="?">
+                <input type="text" class="answer-input" id="answer2" data-id="2" placeholder="?">
             </div>
-            <!-- …וכך הלאה בדיוק אותו דבר עד חידה 10 -->
-            <!-- אני מקצר כאן כדי לא להעתיק את הכל שוב, אבל הן נשארו בדיוק אותו דבר -->
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">3</div>
+                <div class="puzzle-question">אִם חֲבִילַת סֻפְגָּנִיּוֹת מְכִילָה 6 סֻפְגָּנִיּוֹת, אִמָּא קָנְתָה 3 חֲבִילוֹת וּבַסּוֹף אִמָּא נָתְנָה 11 סֻפְגָּנִיּוֹת לַשְּׁכֵנִים, כַּמָּה נִשְׁאַר?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer3" data-id="3" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">4</div>
+                <div class="puzzle-question">בְּכָל כַּד שֶׁמֶן יֵשׁ 1 לִיטֶר שֶׁמֶן זַיִת זַךְ, כַּמָּה לִיטְרִים יֵשׁ בְּ-20 כַּדִּים? תּוֹרִידוּ מֵהַתּוֹצָאָה 12</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer4" data-id="4" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">5</div>
+                <div class="puzzle-question">כַּמָּה אוֹתִיּוֹת יֵשׁ בִּסְבִיבוֹן? הִכְפִּילוּ כָּפוּל מִסְפַּר יְמֵי הַחַג!</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer5" data-id="5" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">6</div>
+                <div class="puzzle-question">אִם מְחַלְּקִים 24 סֻפְגָּנִיּוֹת בֵּין 4 יְלָדִים כַּמָּה כָּל יֶלֶד מְקַבֵּל?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer6" data-id="6" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">7</div>
+                <div class="puzzle-question">כַּמָּה נֵרוֹת מַדְלִיקִים בְּסַךְ הַכֹּל לְאֹרֶךְ כָּל יְמֵי חַג הַחֲנֻכָּה?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer7" data-id="7" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">8</div>
+                <div class="puzzle-question">אִם קֻפְסַת גפרורים מְכִילָה 50 גפרורים, וּכְבָר הִשְׁתַּמְשׁוּ בְּ-44 גפרורים בְּמֶשֶׁךְ כָּל הַחַג, כַּמָּה גפרורים נִשְׁאֲרוּ?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer8" data-id="8" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">9</div>
+                <div class="puzzle-question">בַּחֲבִילַת נֵרוֹת יֵשׁ 80 נֵרוֹת, גַּיְא הִשְׁתַּמֵּשׁ בְּ-74 נֵרוֹת, כַּמָּה נִשְׁאַר לוֹ?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer9" data-id="9" placeholder="?">
+            </div>
+
+            <div class="puzzle-card">
+                <div class="puzzle-number">10</div>
+                <div class="puzzle-question">כַּמָּה יְלָדִים הָיוּ לְמַתִּתְיָהוּ הַכֹּהֵן?</div>
+                <div class="answer-label">התשובה שלי:</div>
+                <input type="text" class="answer-input" id="answer10" data-id="10" placeholder="?">
+            </div>
         </div>
 
         <div class="code-section">
             <h2 class="code-title">הַקּוֹד הַסּוֹדִי</h2>
             <p class="code-subtitle">אָסְפוּ אֶת כָּל הַתְּשׁוּבוֹת שֶׁרְשַׁמְתֶּם לְפִי הַסֵּדֶר (1-10) וְכָתְבוּ אוֹתָן בְּרֶצֶף.</p>
+            <p class="code-subtitle" style="font-size: 0.95em; margin-top: 10px;">שִׂימוּ לֵב! רַק לְאַחַר שֶׁפְּתַרְתֶּם אֶת כָּל 10 הַחִידוֹת, הַקּוֹד הַסּוֹפִי יִהְיֶה נָכוֹן.</p>
             <input type="text" id="finalCode" class="code-input" maxlength="12" placeholder="____________">
             <button class="submit-button" onclick="checkFinalCode()">פְּתַח אֶת הַמַּנְעוּל</button>
             <div id="feedback" class="feedback"></div>
@@ -205,66 +260,69 @@
     </div>
 
     <script>
-        const FINAL_CODE = "757832644665";
+        const FINAL_CODE = "757832644665"; // הקוד הסופי הנכון
 
-        // שמירה אוטומטית של כל התשובות (כמו טיוטה)
-        document.querySelectorAll('.answer-input').forEach(input => {
-            const id = input.getAttribute('data-id');
-            
-            // טען מה שכבר שמרנו
-            const saved = localStorage.getItem('answer_' + id);
-            if (saved) input.value = saved;
+        // שמירה אוטומטטית + מונה של כמה מילאו
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('.answer-input');
+            let filled = 0;
 
-            input.addEventListener('input', function() {
-                localStorage.setItem('answer_' + id, this.value.trim());
+            inputs.forEach(input => {
+                const id = input.getAttribute('data-id');
 
-                // עדכון המונה (רק סופר כמה שדות מלאים)
-                let count = 0;
-                document.querySelectorAll('.answer-input').forEach(i => {
-                    if (i.value.trim() !== '') count++;
+                // טען תשובות שמורות (אם יש)
+                const saved = localStorage.getItem('hanukkah_answer_' + id);
+                if (saved) {
+                    input.value = saved;
+                    if (saved.trim() !== '') filled++;
+                }
+
+                // שמור כל שינוי + עדכן מונה
+                input.addEventListener('input', function() {
+                    const val = this.value.trim();
+                    localStorage.setItem('hanukkah_answer_' + id, val);
+
+                    if (val === '' && this.dataset.wasFilled) {
+                        filled--;
+                        delete this.dataset.wasFilled;
+                    } else if (val !== '' && !this.dataset.wasFilled) {
+                        filled++;
+                        this.dataset.wasFilled = 'true';
+                    }
+                    document.getElementById('filledCount').textContent = filled;
                 });
-                document.getElementById('filledCount').textContent = count;
+            });
+
+            // עדכן מונה בהתחלה
+            document.getElementById('filledCount').textContent = filled;
+
+            // אפשר ללחוץ Enter בשדה הקוד
+            document.getElementById('finalCode').addEventListener('keypress', e => {
+                if (e.key === 'Enter') checkFinalCode();
             });
         });
 
-        // בדיקת הקוד הסופי – **בלי לבדוק אם החידות נכונות בכלל**
+        // בדיקת הקוד הסופי – בלי קשר למה שכתבת בחידות!
         function checkFinalCode() {
             const userCode = document.getElementById('finalCode').value.trim();
             const feedback = document.getElementById('feedback');
 
-            feedback.classList.remove('show');
+            feedback.classList.remove('show', 'correct', 'incorrect');
 
             setTimeout(() => {
                 if (userCode === FINAL_CODE) {
                     feedback.textContent = "כל הכבוד! הקוד נכון! הצלחתם לפענח את הקוד!";
                     feedback.className = 'feedback correct show';
 
-                    // נקה את השמירה אחרי הצלחה
-                    for (let i = 1; i <= 10; i++) {
-                        localStorage.removeItem('answer_' + i);
-                    }
-
                     setTimeout(() => {
-                        window.location.href = "room2.html"; // ← שנה כאן לשם הקובץ הבא שלך
+                        window.location.href = 'new_edit2.html'; // ← שנה כאן לשם הקובץ של החדר הבא!
                     }, 2000);
                 } else {
-                    feedback.textContent = "הקוד שגוי. בדקו שוב או נסו 757832644665";
+                    feedback.textContent = "הקוד שגוי – נסו שוב (רמז: 757832644665)";
                     feedback.className = 'feedback incorrect show';
                 }
             }, 100);
         }
-
-        // Enter בשדה הקוד
-        document.getElementById('finalCode').addEventListener('keypress', e => {
-            if (e.key === 'Enter') checkFinalCode();
-        });
-
-        // עדכון המונה הראשוני
-        let initialCount = 0;
-        document.querySelectorAll('.answer-input').forEach(i => {
-            if (i.value.trim() !== '') initialCount++;
-        });
-        document.getElementById('filledCount').textContent = initialCount;
     </script>
 </body>
 </html>
