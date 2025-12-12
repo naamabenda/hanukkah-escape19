@@ -421,6 +421,8 @@
     </div>
 
     <script>
+        console.log('הסקריפט נטען!');
+        
         // הגדרות - שני כאן את שם הקובץ הבא שלך!
         const REPO_NAME = 'hanukkah-escape19';
         const NEXT_PAGE = 'new_edit2.html';
@@ -439,6 +441,9 @@
             "9": "6",
             "10": "5"
         };
+
+        console.log('הקוד הנכון:', CORRECT_CODE);
+        console.log('התשובות הנכונות:', correctAnswers);
 
         let userAnswers = {};
 
@@ -461,32 +466,52 @@
         }
 
         function checkFinalCode() {
+            console.log('=== בדיקת קוד התחילה ===');
+            
             const userCode = document.getElementById('finalCode').value.trim();
             const feedback = document.getElementById('feedback');
+            
+            console.log('הקוד שהוזן:', userCode);
+            console.log('אורך הקוד:', userCode.length);
             
             feedback.classList.remove('show', 'correct', 'incorrect');
             
             setTimeout(() => {
                 let wrongCount = 0;
+                let wrongPuzzles = [];
+                
+                // בדיקה מפורטת
                 for (let i = 1; i <= 10; i++) {
                     const input = document.getElementById('answer' + i);
                     const userVal = input ? input.value.trim() : '';
                     const correctVal = correctAnswers[String(i)];
                     
+                    console.log(`חידה ${i}: הזנת="${userVal}" | נכון="${correctVal}" | זהה=${userVal === correctVal}`);
+                    
                     if (userVal !== correctVal) {
                         wrongCount++;
+                        wrongPuzzles.push(i);
                     }
                 }
 
+                console.log('סה"כ חידות שגויות:', wrongCount);
+                console.log('חידות שגויות:', wrongPuzzles);
+                console.log('הקוד שהזנת:', userCode);
+                console.log('הקוד הנכון:', CORRECT_CODE);
+                console.log('האם הקודים זהים?', userCode === CORRECT_CODE);
+
                 if (wrongCount > 0) {
-                    feedback.textContent = `⚠️ ישנן חידות עם תשובות שגויות. בדקו את ${wrongCount} החידות שנותרו.`;
+                    feedback.textContent = `⚠️ חידות שגויות: ${wrongPuzzles.join(', ')}. סה"כ ${wrongCount} שגויות.`;
                     feedback.classList.add('feedback', 'incorrect', 'show');
+                    console.log('הודעה: יש חידות שגויות');
                 } else if (userCode.length !== 12) {
-                    feedback.textContent = "⚠️ הקוד חייב להיות בן 12 ספרות בדיוק!";
+                    feedback.textContent = `⚠️ הקוד חייב להיות בן 12 ספרות! אתה הזנת ${userCode.length} ספרות.`;
                     feedback.classList.add('feedback', 'incorrect', 'show');
+                    console.log('הודעה: אורך קוד שגוי');
                 } else if (userCode === CORRECT_CODE) {
                     feedback.textContent = "כל הכבוד! הקוד נכון! הצלחתם לפענח את הקוד!";
                     feedback.classList.add('feedback', 'correct', 'show');
+                    console.log('הודעה: הקוד נכון! עוברים לעמוד הבא...');
                     
                     setTimeout(() => {
                         const isGithubPages = window.location.hostname.includes('github.io');
@@ -497,17 +522,25 @@
                         }
                     }, 2000);
                 } else {
-                    feedback.textContent = "❌ הקוד שגוי. בדקו שוב את החישובים ושסידרתם את התשובות לפי המספור הנכון (1-10)!";
+                    feedback.textContent = `❌ הקוד שגוי. הזנת: "${userCode}" | נדרש: "${CORRECT_CODE}"`;
                     feedback.classList.add('feedback', 'incorrect', 'show');
+                    console.log('הודעה: הקוד שגוי');
                 }
+                
+                console.log('=== בדיקת קוד הסתיימה ===');
             }, 100);
         }
 
+        window.checkFinalCode = checkFinalCode;
+
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded - מתחיל להאזין לאירועים');
+            
             for (let i = 1; i <= 10; i++) {
                 const input = document.getElementById('answer' + i);
                 if (input) {
                     input.addEventListener('input', handleInput);
+                    console.log(`מאזין נוסף לחידה ${i}`);
                 }
             }
             
@@ -515,9 +548,16 @@
             if (codeInput) {
                 codeInput.addEventListener('keypress', function(e) {
                     if (e.key === 'Enter') {
+                        console.log('Enter נלחץ!');
                         checkFinalCode();
                     }
                 });
+                console.log('מאזין Enter נוסף');
+            }
+            
+            const submitBtn = document.querySelector('.submit-button');
+            if (submitBtn) {
+                console.log('כפתור נמצא, onclick מוגדר');
             }
         });
     </script>
