@@ -166,7 +166,7 @@
 <body>
 
     <div class="progress-counter">
-        חידות שהושלמו: <span id="filledCount">0</span>/10
+        חידות שמולאו: <span id="filledCount">0</span>/10
     </div>
 
     <div class="container">
@@ -175,8 +175,8 @@
 
         <div class="instructions">
             <h2>הוראות המשחק</h2>
-            <p>פתרו את כל 10 החידות, רשמו את התשובות במספרים בלבד.<br>
-            בסוף אספו את כל המספרים לפי הסדר וקבלו את הקוד הסודי!</p>
+            <p>פתרו את החידות אם תרצו, אבל אפשר להזין את הקוד הסופי ישירות.<br>
+            התשובות נשמרות אוטומטית (כמו טיוטה) – אם תצאו ותחזרו, הן יישארו!</p>
         </div>
 
         <div class="puzzles-grid">
@@ -234,7 +234,7 @@
 
         <div class="code-section">
             <h2 class="code-title">הקוד הסופי</h2>
-            <p>רשמו את כל 10 התשובות ברצף (ללא רווחים)</p>
+            <p>רשמו את כל 10 התשובות ברצף (ללא רווחים) – או הזינו ישירות</p>
             <input type="text" id="finalCode" class="code-input" maxlength="12" placeholder="____________">
             <button class="submit-button" onclick="checkFinalCode()">פתח את המנעול</button>
             <div id="feedback" class="feedback"></div>
@@ -242,7 +242,7 @@
     </div>
 
     <script>
-        // התשובות הנכונות (חייבים להיות בדיוק ככה – מחרוזות!)
+        // התשובות הנכונות (רק לצורך צבע מסגרת אופציונלי, לא חובה)
         const correctAnswers = {
             "1": "7",
             "2": "5",
@@ -259,15 +259,42 @@
         const FINAL_CODE = "757832644665";   // הקוד הסופי הנכון
 
         let filledCount = 0;
-        let correctCount = 0;
-
         const filledCountSpan = document.getElementById('filledCount');
 
-        // עדכון מונה + בדיקת נכונות בכל שינוי
+        // שמירת תשובות ב-localStorage (כמו טיוטה)
+        function loadSavedAnswers() {
+            const saved = JSON.parse(localStorage.getItem('hanukkahEscapeAnswers')) || {};
+            document.querySelectorAll('.answer-input').forEach(input => {
+                const id = input.getAttribute('data-id');
+                if (saved[id]) {
+                    input.value = saved[id];
+                    if (saved[id] !== "" && !isNaN(saved[id])) {
+                        filledCount++;
+                        input.dataset.filled = "true";
+                    }
+                    // צבע מסגרת אם נכון (אופציונלי)
+                    if (saved[id] === correctAnswers[id]) {
+                        input.style.borderColor = "#00FF00";
+                    }
+                }
+            });
+            filledCountSpan.textContent = filledCount;
+        }
+
+        function saveAnswer(id, value) {
+            const saved = JSON.parse(localStorage.getItem('hanukkahEscapeAnswers')) || {};
+            saved[id] = value;
+            localStorage.setItem('hanukkahEscapeAnswers', JSON.stringify(saved));
+        }
+
+        // עדכון מונה + שמירה בכל שינוי
         document.querySelectorAll('.answer-input').forEach(input => {
             input.addEventListener('input', function() {
                 const id = this.getAttribute('data-id');
                 const value = this.value.trim();
+
+                // שמירה אוטומטית
+                saveAnswer(id, value);
 
                 // עדכון מונה "מולא"
                 if (value !== "" && !isNaN(value)) {
@@ -284,13 +311,11 @@
                     }
                 }
 
-                // בדיקת נכונות (שקטה – רק בשביל הקוד הסופי)
+                // צבע מסגרת אם נכון (אופציונלי, לא חובה לעבור)
                 if (value === correctAnswers[id]) {
                     this.style.borderColor = "#00FF00";
-                    this.dataset.correct = "true";
                 } else {
                     this.style.borderColor = "#CC9900";
-                    delete this.dataset.correct;
                 }
             });
         });
@@ -299,26 +324,22 @@
             const feedback = document.getElementById('feedback');
             feedback.classList.remove('show', 'correct', 'incorrect');
 
-            // בדיקה שכל החידות נכונות
-            const allCorrect = Array.from(document.querySelectorAll('.answer-input'))
-                .every(input => input.dataset.correct === "true");
-
             const userCode = document.getElementById('finalCode').value.trim();
 
             setTimeout(() => {
-                if (!allCorrect) {
-                    feedback.textContent = "יש תשובות שגויות! בדקו שוב את כל החידות.";
-                    feedback.className = "feedback incorrect show";
-                } else if (userCode !== FINAL_CODE) {
+                if (userCode !== FINAL_CODE) {
                     feedback.textContent = "הקוד שגוי… נסו שוב";
                     feedback.className = "feedback incorrect show";
                 } else {
                     feedback.textContent = "כל הכבוד!!! הקוד נכון – אתם ממשיכים לחדר הבא…";
                     feedback.className = "feedback correct show";
 
+                    // נקה שמירה אחרי הצלחה (אופציונלי)
+                    localStorage.removeItem('hanukkahEscapeAnswers');
+
                     setTimeout(() => {
                         // כאן שנה את השם של הדף הבא שלך!
-                        window.location.href = "new_edit2.html";   // ← שנה לפי השם האמיתי של הקובץ הבא
+                        window.location.href = "room2.html";   // ← שנה לפי השם האמיתי של הקובץ הבא
                     }, 2500);
                 }
             }, 300);
@@ -328,6 +349,9 @@
         document.getElementById('finalCode').addEventListener('keypress', e => {
             if (e.key === 'Enter') checkFinalCode();
         });
+
+        // טען תשובות שמורות בעת טעינה
+        loadSavedAnswers();
     </script>
 </body>
 </html>
