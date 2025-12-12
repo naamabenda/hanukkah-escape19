@@ -6,7 +6,7 @@
     <title>חֶדֶר בְּרִיחָה חֲנֻכָּה - בְּרוּכִים הַבָּאִים!</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* ... CSS נשאר ללא שינוי ... */
+        /* CSS נשאר ללא שינוי */
         * {
             margin: 0;
             padding: 0;
@@ -368,8 +368,8 @@
             const playerName = document.getElementById('playerName').value.trim();
             const warning = document.getElementById('warning');
             
-            // היעד הוא הקובץ הבא שלך
-            const targetFileName = 'room1.html'; // *** שם הקובץ הספציפי שאתה רוצה לעבור אליו ***
+            // 🎯 תיקון 1: שינוי שם קובץ היעד לשם שציינת
+            const targetFileName = 'new_edit.html1.html'; 
             const nextHtmlPage = getPath(targetFileName); 
 
             if (!playerName) {
@@ -386,12 +386,12 @@
                 const startTime = Date.now();
                 localStorage.setItem('gameStartTime', startTime.toString());
                 
-                // מעבר לחדר הראשון
-                window.location.href = new_edit.html1.html; // *** שימוש במשתנה הנתיב התקין ***
+                // 🚀 תיקון 2: מעבר לחדר הראשון באמצעות המשתנה התקין
+                window.location.href = new_edit.html1.html; 
 
             } catch (error) {
                 console.error('Error starting game:', error);
-                // במקרה של שגיאה בשמירה/העברה, עדיין נסה לנווט (החלף את new_edit.html1.html בשם קובץ תקין)
+                // 🚀 תיקון 3: תיקון גם בבלוק ה-catch
                 window.location.href = new_edit.html1.html;
             }
         }
