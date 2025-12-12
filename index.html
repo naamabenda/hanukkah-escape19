@@ -316,7 +316,7 @@
                 >
             </div>
 
-            <button class="start-button" onclick="startGame()">
+            <button class="start-button" id="startBtn">
                 🚀 הַתְחֵל אֶת הַמַּסָּע!
             </button>
 
@@ -342,49 +342,50 @@
 
         createStars();
 
+        // הגדרות
+        const REPO_NAME = 'hanukkah-escape19';
+        const NEXT_PAGE = 'new_edit1.html';
+
         // מאזין ל-Enter
         document.getElementById('playerName').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 startGame();
             }
         });
-        
-        // ✅ שם הריפוזיטורי שלך ב-GitHub
-        const REPO_NAME = 'hanukkah-escape19'; 
-        
-        const isGithubPages = window.location.hostname.endsWith('github.io');
 
-        function getPath(fileName) {
-            if (isGithubPages) {
-                return `/${REPO_NAME}/${fileName}`;
-            }
-            return fileName;
-        }
+        // מאזין ללחיצה על הכפתור
+        document.getElementById('startBtn').addEventListener('click', startGame);
 
         // התחלת המשחק
         function startGame() {
             const playerName = document.getElementById('playerName').value.trim();
             const warning = document.getElementById('warning');
 
+            // בדיקה אם הוזן שם
             if (!playerName) {
                 warning.classList.add('show');
                 setTimeout(() => warning.classList.remove('show'), 3000);
                 return;
             }
 
-            // שמירת שם השחקן ב-localStorage
-            localStorage.setItem('hanukkahEscapePlayer', playerName); 
+            // שמירת שם השחקן
+            localStorage.setItem('hanukkahEscapePlayer', playerName);
             
             // התחלת הטיימר
             const startTime = Date.now();
             localStorage.setItem('gameStartTime', startTime.toString());
-            
-            // ✅ תיקון: שם הקובץ המדויק שלך ב-GitHub
-            const targetFileName = 'new_edit1.html';
-            const nextHtmlPage = getPath(targetFileName); 
-            
+
             // מעבר לעמוד הבא
-            window.location.href = targetFileName;
+            const isGithubPages = window.location.hostname.includes('github.io');
+            let nextUrl;
+            
+            if (isGithubPages) {
+                nextUrl = `/${REPO_NAME}/${NEXT_PAGE}`;
+            } else {
+                nextUrl = NEXT_PAGE;
+            }
+
+            window.location.href = nextUrl;
         }
     </script>
 </body>
