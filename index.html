@@ -6,7 +6,6 @@
     <title>חֶדֶר בְּרִיחָה חֲנֻכָּה - בְּרוּכִים הַבָּאִים!</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* CSS נשאר ללא שינוי */
         * {
             margin: 0;
             padding: 0;
@@ -102,7 +101,6 @@
         }
 
         .logo-icon {
-            /* הוספת תוכן אמוג'י ב-CSS */
             font-size: 5em;
             color: #FFD700; 
             text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
@@ -298,10 +296,12 @@
             </div>
 
             <h1>חֶדֶר בְּרִיחָה חֲנֻכָּה</h1>
-            <p class="subtitle">מַסָּע בְּעִקְבוֹת הַחַג</p> <div class="description">
+            <p class="subtitle">מַסָּע בְּעִקְבוֹת הַחַג</p>
+            
+            <div class="description">
                 <p><strong>בְּרוּכִים הַבָּאִים לְחֶדֶר הַבְּרִיחָה הַמְּרַתֵּק!</strong></p>
                 <p>לִפְנֵיכֶם מַסָּע שֶׁל 4 חֲדָרִים, מְלֵאֵי חִידוֹת, צְפָנִים וְאֶתְגָּרִים מְרַתְּקִים עַל חַג הַחֲנֻכָּה.</p>
-                <p>⏱️ **הַטַּיְמֶר יַתְחִיל לִסְפּוֹר מֵרֶגַע שֶׁתִּלְחֲצוּ "הַתְחֵל".**</p>
+                <p>⏱️ <strong>הַטַּיְמֶר יַתְחִיל לִסְפּוֹר מֵרֶגַע שֶׁתִּלְחֲצוּ "הַתְחֵל".</strong></p>
                 <p>🏆 הַשַּׂחְקָן הַמָּהִיר בְּיוֹתֵר יִזְכֶּה בַּמָּקוֹם הָרִאשׁוֹן בְּטַבְלַת הַשִּׂיאִים!</p>
             </div>
 
@@ -349,10 +349,8 @@
             }
         });
         
-        // *******************************************************************
-        // ** תיקון חובה: ודא שהשם הוא שם הריפוזיטורי המדויק שלך!
+        // ✅ תיקון: שם הריפוזיטורי - שנה לשם הריפוזיטורי שלך
         const REPO_NAME = 'hanukkah-escape'; 
-        // *******************************************************************
         
         const isGithubPages = window.location.hostname.endsWith('github.io');
 
@@ -368,8 +366,8 @@
             const playerName = document.getElementById('playerName').value.trim();
             const warning = document.getElementById('warning');
             
-            // 🎯 תיקון 1: שינוי שם קובץ היעד לשם שציינת
-            const targetFileName = 'new_edit.html1.html'; 
+            // ✅ תיקון: שם קובץ תקין (הסרת .html1 ושינוי ל-.html)
+            const targetFileName = 'room1.html'; 
             const nextHtmlPage = getPath(targetFileName); 
 
             if (!playerName) {
@@ -379,19 +377,19 @@
             }
 
             try {
-                // שמירת שם השחקן
+                // שמירת שם השחקן ב-localStorage
                 localStorage.setItem('hanukkahEscapePlayer', playerName); 
                 
                 // התחלת הטיימר
                 const startTime = Date.now();
                 localStorage.setItem('gameStartTime', startTime.toString());
                 
-                // 🚀 תיקון 2: מעבר לחדר הראשון באמצעות המשתנה התקין
+                // מעבר לחדר הראשון
                 window.location.href = new_edit.html1.html; 
 
             } catch (error) {
                 console.error('Error starting game:', error);
-                // 🚀 תיקון 3: תיקון גם בבלוק ה-catch
+                // גיבוי במקרה של שגיאה
                 window.location.href = new_edit.html1.html;
             }
         }
