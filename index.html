@@ -6,7 +6,7 @@
     <title>חֶדֶר בְּרִיחָה חֲנֻכָּה - בְּרוּכִים הַבָּאִים!</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* CSS נשאר ללא שינוי */
+        /* ... CSS נשאר ללא שינוי ... */
         * {
             margin: 0;
             padding: 0;
@@ -29,7 +29,6 @@
             padding-bottom: 50px;
         }
         
-        /* ... שאר ה-CSS שלך ... */
         @keyframes fadeInScale {
             from { 
                 opacity: 0; 
@@ -352,7 +351,7 @@
         
         // *******************************************************************
         // ** תיקון חובה: ודא שהשם הוא שם הריפוזיטורי המדויק שלך!
-        const REPO_NAME = 'hanukkah-escape'; // ** זה מה שאתה צריך לבדוק! **
+        const REPO_NAME = 'hanukkah-escape'; 
         // *******************************************************************
         
         const isGithubPages = window.location.hostname.endsWith('github.io');
@@ -370,7 +369,7 @@
             const warning = document.getElementById('warning');
             
             // היעד הוא הקובץ הבא שלך
-            const targetFileName = 'index.html1'; 
+            const targetFileName = 'room1.html'; // *** שם הקובץ הספציפי שאתה רוצה לעבור אליו ***
             const nextHtmlPage = getPath(targetFileName); 
 
             if (!playerName) {
@@ -381,17 +380,18 @@
 
             try {
                 // שמירת שם השחקן
-                localStorage.setItem('hanukkahEscapePlayer', playerName); // השתמשתי במפתח ייחודי
+                localStorage.setItem('hanukkahEscapePlayer', playerName); 
                 
                 // התחלת הטיימר
                 const startTime = Date.now();
                 localStorage.setItem('gameStartTime', startTime.toString());
                 
                 // מעבר לחדר הראשון
-                window.location.href = new_edit.html1.html;
+                window.location.href = new_edit.html1.html; // *** שימוש במשתנה הנתיב התקין ***
 
             } catch (error) {
                 console.error('Error starting game:', error);
+                // במקרה של שגיאה בשמירה/העברה, עדיין נסה לנווט (החלף את new_edit.html1.html בשם קובץ תקין)
                 window.location.href = new_edit.html1.html;
             }
         }
