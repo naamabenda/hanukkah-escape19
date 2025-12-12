@@ -3,16 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>חֲדַר בְּרִיחָה בְּעִקְבוֹת חַג הַחֲנֻכָּה שָׁלָב מִסְפָּר 4</title>
+    <title>נִרְאֶה שֶׁאַתֶּם טוֹבִים אִם הִגַּעְתֶּם לְכָאן... אֲבָל שֶׁלֹּא תִּתְבַּלְבְּלוּ זֹאת רַק הַהַתְחָלָה...</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS נשאר ללא שינוי */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Heebo', sans-serif;
             min-height: 100vh;
@@ -22,377 +16,97 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            padding: 40px 20px;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), inset 0 0 20px rgba(255, 215, 0, 0.1); }
-            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), inset 0 0 30px rgba(255, 215, 0, 0.2); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-
-        .game-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 50px;
-            background: rgba(20, 15, 10, 0.95);
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes glow { 0%,100% { box-shadow: 0 0 20px rgba(255,215,0,0.3); } 50% { box-shadow: 0 0 40px rgba(255,215,0,0.6); } }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .victory-container {
+            background: rgba(20,15,10,0.95);
             backdrop-filter: blur(15px);
-            border-radius: 25px;
             border: 5px double #FFD700;
-            box-shadow: 0 20px 80px rgba(255, 215, 0, 0.6), inset 0 0 30px rgba(112, 93, 58, 0.4);
-            animation: fadeIn 1.5s ease-in, glow 4s ease-in-out infinite;
-        }
-
-        h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 3em;
-            color: #FFD700;
-            text-shadow: 0 0 30px #FFD700, 0 0 60px rgba(255, 215, 0, 0.5);
-            margin-bottom: 25px;
-            text-align: center;
-            line-height: 1.3;
-        }
-
-        p.intro {
-            font-size: 1.3em;
-            color: #E6D8A2;
-            margin-bottom: 40px;
-            text-align: center;
-            line-height: 1.8;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-        }
-
-        /* רשת הקלפים */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 15px;
-            perspective: 1000px;
-            margin: 40px 0;
-        }
-
-        /* עיצוב קלף */
-        .card {
-            height: 140px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s ease-in-out;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-        }
-
-        /* קלף שנפתח */
-        .card.flipped {
-            transform: rotateY(180deg);
-        }
-        
-        /* קלף שנמצא (תואם) - נעלם */
-        .card.match {
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s 0.6s, opacity 0.6s linear;
-            pointer-events: none;
-        }
-
-        .card-face {
-            position: absolute;
+            border-radius: 25px;
+            padding: 60px;
+            box-shadow: 0 20px 80px rgba(255,215,0,0.6);
+            animation: fadeIn 2s, glow 4s infinite;
             width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-            padding: 10px;
-            box-sizing: border-box;
         }
-
-        /* גב הקלף (הצד הסגור) */
-        .card-back {
-            background: linear-gradient(135deg, #3E2723, #5D4037);
-            color: #FFD700;
-            font-size: 2.5em;
-            border: 3px solid #FFD700;
-            font-style: italic;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        h1 { font-family: 'Cinzel', serif; font-size: 3em; color: #FFD700; text-shadow: 0 0 30px gold; text-align: center; margin-bottom: 30px; }
+        p { font-size: 1.4em; color: #E6D8A2; text-align: center; margin-bottom: 25px; }
+        .challenge-box { margin-top: 50px; padding: 40px; border: 3px solid #8B0000; background: rgba(17,17,17,0.9); border-radius: 20px; animation: pulse 3s infinite; }
+        .challenge-box h2 { color: #FFD700; font-family: 'Cinzel', serif; font-size: 2.5em; text-align: center; margin-bottom: 30px; }
+        .image-container { text-align: center; padding: 30px; background: rgba(0,0,0,0.6); border-radius: 15px; border: 2px solid #CC9900; }
+        .image-container img { max-width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(255,215,0,0.3); }
+        input[type="text"] { width: 100%; padding: 18px; font-size: 1.4em; text-align: center; background: #000; color: #FFD700; border: 3px solid #CC9900; border-radius: 15px; margin-bottom: 20px; }
+        #submitLocation {
+            background: linear-gradient(135deg, #6D4C41, #8B0000);
+            color: #FFD700; padding: 18px 50px; border: 3px solid #FFD700; border-radius: 50px;
+            font-size: 1.4em; font-weight: bold; cursor: pointer; width: 100%;
         }
-
-        .card-back::before {
-            content: '';
-        }
-
-        /* פנים הקלף (הצד הפתוח) */
-        .card-front {
-            background: linear-gradient(135deg, rgba(68, 68, 68, 0.95), rgba(51, 51, 51, 0.95));
-            color: #FFFAEC;
-            font-size: 1.05em;
-            line-height: 1.3;
-            text-align: center;
-            transform: rotateY(180deg);
-            border: 3px solid #8B0000;
-            font-weight: 500;
-            padding: 15px;
-        }
-        
-        /* משוב */
-        #feedback {
-            margin-top: 40px;
-            font-size: 1.8em;
-            color: #FFD700;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-            min-height: 50px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-        }
-        
-        #restart-button {
-            /* הלחצן הזה כבר לא נחוץ אם עוברים אוטומטית */
-            display: none; 
-        }
-
-        /* Media Queries נשארים ללא שינוי */
-        @media (max-width: 1024px) {
-            .cards-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .game-container {
-                padding: 30px 20px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            p.intro {
-                font-size: 1.1em;
-            }
-
-            .cards-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-            }
-
-            .card {
-                height: 110px;
-            }
-
-            .card-front {
-                font-size: 0.85em;
-                padding: 8px;
-            }
-
-            #feedback {
-                font-size: 1.4em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .cards-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+        #submitLocation:hover { transform: scale(1.05); }
+        #feedbackLocation { margin-top: 25px; padding: 20px; border-radius: 15px; font-size: 1.4em; text-align: center; opacity: 0; transition: opacity 0.5s; }
+        #feedbackLocation.show { opacity: 1; }
+        .correct { background: rgba(0,255,0,0.2); border: 3px solid lime; color: lime; }
+        .incorrect { background: rgba(255,0,0,0.2); border: 3px solid red; color: #FF7777; }
+        @media (max-width: 768px) { h1 { font-size: 2em; } .challenge-box h2 { font-size: 1.8em; } }
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <h1>חֶדֶר מִסְפָּר 3: זֻוּגוֹת נִסְתָּרִים - מַסָּע בְּעִקְבוֹת הַחֲנֻכָּה</h1>
-        <p class="intro">נִרְאֶה שֶׁאַתֶּם מַמָּשׁ חֲכָמִים אִם הִגַּעְתֶּם עַד לְכָאן... אַךְ שִׂימוּ לֵב, זֶה עוֹד לֹא נִגְמַר וְהִגִּיעַ הַזְּמַן לַשָּׁלָב הַבָּא: מְצָא/י אֶת 15 הַזֻּוּגוֹת בַּזְּמַן הַקָּצָר בְּיוֹתֵר. הַחֻקִּים הֵם פְּשׁוּטִים: הַתְאִימוּ אֶת הַתְּשׁוּבָה אֶל הַחִידָה וְהַשְׁלִימוּ אֶת הַמְּשִׂימָה!</p>
+    <div class="container">
+        <div class="victory-container">
+            <h1>חֶדֶר מִסְפָּר 2: צֹפֶן הַמַּכַּבִּים - מַסָּע בְּעִקְבוֹת הַחֲנֻכָּה</h1>
+            <p>פִּתַּרְתֶּם אֶת צֹפֶן 12 הַסְּפָרוֹת וְהוֹכַחְתֶּם שֶׁאַתֶּם חוֹקְרִים מַבְרִיקִים.<br>
+               עַכְשָׁיו עֲלֵיכֶם לְהִתְמוֹדֵד עִם כְּתָב הַסְּתָרִים הָאֲמִתִּי: <strong>צֹפֶן הַמַּכַכַּבִּים</strong>.</p>
+            <p>הַבִּיטוּ בִּכְתָב הָעַתִּיק שֶׁקִּבַּלְתֶּם, וְנַסּוּ לְפַעְנֵחַ אֶת הַמֶּסֶר הַמִּסְתַּתֵּר בַּתְּמוּנָה!</p>
 
-        <div class="cards-grid" id="cards-grid"></div>
-
-        <div id="feedback">...מְחַכִּים לַקְּלָף הָרִאשׁוֹן...</div>
+            <div class="challenge-box">
+                <h2>צֹפֶן הַמַּכַּבִּים</h2>
+                <div class="image-container">
+                    <img src="secret_message.png.png" alt="כְּתָב סְתָרִים עַתִּיק">
+                </div>
+                <div class="input-section">
+                    <input type="text" id="locationInput" placeholder="הַקְלִידוּ אֶת הַפִּתְרוֹן הַמָּלֵא">
+                    <button id="submitLocation">לַחֲצוּוּ לִבְדִיקָה</button>
+                    <div id="feedbackLocation"></div>
+                </div>
+            </div>
         </div>
+    </div>
 
     <script>
-        // *******************************************************************
-        // ** הגדרות ניתוב ו-GitHub Pages (חובה!)
-        const REPO_NAME = 'hanukkah-escape'; 
-        const isGithubPages = window.location.hostname.endsWith('github.io');
+        const CORRECT_sentence_NO_SPACES = "כלאחדהואאורקטןוכולנואוראיתן";
+        const FULL_CORRECT_SENTENCE = "כָּל אֶחָד הוּא אוֹר קָטָן וְכֻלָּנוּ אוֹר אֵיתָן";
 
-        function getPath(fileName) {
-            if (isGithubPages) {
-                return `/${REPO_NAME}/${fileName}`;
-            }
-            return fileName;
-        }
-        // *******************************************************************
+        // הקובץ הבא – בדיוק כמו שכתבת
+        const NEXT_LEVEL_FILE = 'new_edit3.html';
 
-        const cardPairs = [
-            { id: 1, content: "פַּךְ קָטָן" },
-            { id: 1, content: "הִסְפִּיק לִשְׁמוֹנָה יָמִים בִּלְבַד" },
-            { id: 2, content: "עַל הַנִּסִּים" },
-            { id: 2, content: "תְּפִלַּת הוֹדָאָה הַנֶּאֱמֶרֶת גַּם בְּפּוּרִים" },
-            { id: 3, content: "חֲנֻכִּיָּה" },
-            { id: 3, content: "מַדְלִיקִים לְזֵכֶר וּפִרְסוּם הַנֵּס" },
-            { id: 4, content: "36 נֵרוֹת" },
-            { id: 4, content: "סְכוּם הַנֵּרוֹת הַמֻּדְלָקִים לְלֹא הַשַּׁמָּשׁ" },
-            { id: 5, content: "אַנְטִיּוֹכוּס" },
-            { id: 5, content: "הַמֶּלֶךְ שֶׁגָּזַר גְּזֵרוֹת עַל הַתּוֹרָה" },
-            { id: 6, content: "כַּד הַשֶּׁמֶן" },
-            { id: 6, content: "הוּא מְקוֹר נֵס חַג הַחֲנֻכָּה" },
-            { id: 7, content: "מַתִּתְיָהוּ" },
-            { id: 7, content: "כֹּהֵן גָּדוֹל, אֲבִי מִשְׁפַּחַת הַחַשְׁמוֹנָאִים" },
-            { id: 8, content: "צֵאת הַכּוֹכָבִים" },
-            { id: 8, content: "זְמַן הַדְלָקַת נֵרוֹת חֲנֻכָּה" },
-            { id: 9, content: "דְּמֵי חֲנֻכָּה" },
-            { id: 9, content: "מִנְהָג שֶׁנּוֹצַר כְּדֵי לְעוֹדֵד לִמּוּד צְדָקָה" },
-            { id: 10, content: "מָעוֹז צוּר" },
-            { id: 10, content: "פִּיּוּט הַנֶּאֱמָר לְאַחַר הַהַדְלָקָה" },
-            { id: 11, content: "מַכַּבִּים" }, 
-            { id: 11, content: "הַכִּנּוּי שֶׁל לוֹחֲמֵי הַמֶּרֶד" }, 
-            { id: 12, content: "בֵּית הַמִּקְדָּשׁ" }, 
-            { id: 12, content: "הַמָּקוֹם בּוֹ נִמְצָא פַּךְ הַשֶּׁמֶן" },
-            { id: 13, content: "לְבִיבָה" },
-            { id: 13, content: "מַאֲכָל מְטֻגָּן הַנֶּאֱכָל בֶּחָג" },
-            { id: 14, content: "סְבִיבוֹן" },
-            { id: 14, content: "בּוֹ שִׂחֲקוּ הַיְלָדִים כְּדֵי לְבַלְבֵּל אֶת הָרוֹמָאִים" },
-            { id: 15, content: "זֹאת חֲנֻכָּה" },
-            { id: 15, content: "הַכִּנּוּי לְיוֹם הַשְּׁמִינִי וְהָאַחֲרוֹן שֶׁל הֶחָג" }
-        ];
+        document.getElementById('submitLocation').addEventListener('click', () => {
+            const userInput = document.getElementById('locationInput').value.trim();
+            const feedback = document.getElementById('feedbackLocation');
 
-        let firstCard = null;
-        let secondCard = null;
-        let lockBoard = false;
-        let matchesFound = 0;
-        const totalMatches = cardPairs.length / 2;
-        const gridElement = document.getElementById('cards-grid');
-        const feedbackElement = document.getElementById('feedback');
-        // const restartButton = document.getElementById('restart-button'); // הוסר
+            feedback.classList.remove('show', 'correct', 'incorrect');
 
-        function shuffle(array) {
-            let currentIndex = array.length, randomIndex;
-            while (currentIndex !== 0) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex--;
-                [array[currentIndex], array[randomIndex]] = [
-                    array[randomIndex], array[currentIndex]];
-            }
-            return array;
-        }
-
-        function createBoard() {
-            firstCard = null;
-            secondCard = null;
-            lockBoard = false;
-            matchesFound = 0;
-            feedbackElement.textContent = '...מְחַכִּים לַקְּלָף הָרִאשׁוֹן...';
-            // restartButton.style.display = 'none'; // הוסר
-
-            const cardsArray = shuffle([...cardPairs]); 
-            gridElement.innerHTML = '';
-
-            cardsArray.forEach(pair => {
-                const card = document.createElement('div');
-                card.classList.add('card');
-                card.dataset.id = pair.id; 
-                card.addEventListener('click', flipCard); 
-
-                const cardFront = document.createElement('div');
-                cardFront.classList.add('card-face', 'card-front');
-                cardFront.innerHTML = pair.content;
-                
-                const cardBack = document.createElement('div');
-                cardBack.classList.add('card-face', 'card-back');
-
-                card.appendChild(cardFront);
-                card.appendChild(cardBack);
-                gridElement.appendChild(card);
-            });
-        }
-
-        function flipCard() {
-            if (lockBoard) return;
-            if (this.classList.contains('flipped')) return;
-
-            this.classList.add('flipped');
-
-            if (!firstCard) {
-                firstCard = this;
-                feedbackElement.textContent = 'קְלָף רִאשׁוֹן נִבְחַר. נַסֵּה/י לִמְצוֹא אֶת בֶּן זוּגוֹ...';
-                return;
-            }
-
-            secondCard = this;
-            lockBoard = true; 
-            feedbackElement.textContent = 'בּוֹדֵק הַתְאָמָה...';
-
-            checkForMatch();
-        }
-
-        function checkForMatch() {
-            const isMatch = firstCard.dataset.id === secondCard.dataset.id;
-            
-            if (isMatch) {
-                disableCards();
-            } else {
-                unflipCards();
-            }
-        }
-
-        function disableCards() {
-            matchesFound++;
-            
             setTimeout(() => {
-                firstCard.classList.add('match');
-                secondCard.classList.add('match');
-                
-                resetBoard();
-                
-                if (matchesFound === totalMatches) {
-                    // ********************************************
-                    // ** לוגיקת סיום השלב ומעבר לעמוד הבא
-                    // ********************************************
-                    feedbackElement.innerHTML = `🎉 כָּל הַכָּבוֹד! מְצָאתֶם אֶת כָּל ${totalMatches} הַזֻּוּגוֹת! עוֹבְרִים לַחֲדַר הַסִּיּוּם...`;
-                    
-                    // עובר לעמוד הסיום לאחר 3 שניות
+                const cleanInput = userInput.replace(/\s/g, '');
+
+                if (cleanInput === CORRECT_sentence_NO_SPACES) {
+                    feedback.innerHTML = `פִּעְנוּחַ הַצּוֹפֶן הִצְלִיחַ!<br><strong>${FULL_CORRECT_SENTENCE}</strong>`;
+                    feedback.className = 'correct show';
+
                     setTimeout(() => {
-                        window.location.href = getPath('new_edit.html4.html');
-                    }, 3000); 
-
+                        window.location.href = NEXT_LEVEL_FILE; // עובר אוטומטית לחדר 3
+                    }, 2500);
                 } else {
-                    feedbackElement.textContent = `✅ נִמְצָא זוג! נוֹתְרוּ עוֹד ${totalMatches - matchesFound} זֻוּגוֹת.`;
+                    feedback.innerHTML = "נַסּוּ שׁוּב. הַקְפִּידוּ עַל אִיּוּת מְדֻיָּק!";
+                    feedback.className = 'incorrect show';
                 }
-            }, 600);
-        }
+            }, 100);
+        });
 
-        function unflipCards() {
-            setTimeout(() => {
-                firstCard.classList.remove('flipped');
-                secondCard.classList.remove('flipped');
-                resetBoard();
-                feedbackElement.textContent = '❌ לֹא תּוֹאֵם. נַסּוּ שׁוּב.';
-            }, 1200);
-        }
-
-        function resetBoard() {
-            [firstCard, secondCard, lockBoard] = [null, null, false];
-        }
-
-        // restartButton.addEventListener('click', createBoard); // הוסר
-
-        createBoard();
+        document.getElementById('locationInput').addEventListener('keypress', e => {
+            if (e.key === 'Enter') document.getElementById('submitLocation').click();
+        });
+    });
     </script>
 </body>
-
 </html>
