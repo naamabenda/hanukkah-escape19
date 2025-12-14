@@ -73,11 +73,12 @@
     </div>
 
     <script>
+        // הגדרות - שני כאן את שם הקובץ הבא!
+        const REPO_NAME = 'hanukkah-escape19';
+        const NEXT_PAGE = 'new_edit3.html';
+        
         const CORRECT_sentence_NO_SPACES = "כלאחדהואאורקטןוכולנואוראיתן";
         const FULL_CORRECT_SENTENCE = "כָּל אֶחָד הוּא אוֹר קָטָן וְכֻלָּנוּ אוֹר אֵיתָן";
-
-        // הניתוב לעמוד הבא – בדיוק כמו שביקשת
-        const NEXT_LEVEL_FILE = 'new_edit3.html';
 
         document.getElementById('submitLocation').addEventListener('click', () => {
             const userInput = document.getElementById('locationInput').value.trim();
@@ -93,7 +94,13 @@
                     feedback.className = 'correct show';
 
                     setTimeout(() => {
-                        window.location.href = NEXT_LEVEL_FILE; // מעביר ל-new_edit3.html
+                        // ניתוב נכון עם תמיכה ב-GitHub Pages
+                        const isGithubPages = window.location.hostname.includes('github.io');
+                        if (isGithubPages) {
+                            window.location.href = '/' + REPO_NAME + '/' + NEXT_PAGE;
+                        } else {
+                            window.location.href = NEXT_PAGE;
+                        }
                     }, 2500);
                 } else {
                     feedback.innerHTML = "נַסּוּ שׁוּב. הַקְפִּידוּ עַל אִיּוּת מְדֻיָּק!";
