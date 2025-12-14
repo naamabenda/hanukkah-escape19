@@ -58,7 +58,6 @@
             <p>פִּתַּרְתֶּם אֶת צֹפֶן 12 הַסְּפָרוֹת וְהוֹכַחְתֶּם שֶׁאַתֶּם חוֹקְרִים מַבְרִיקִים.<br>
                עַכְשָׁיו עֲלֵיכֶם לְהִתְמוֹדֵד עִם כְּתָב הַסְּתָרִים הָאֲמִתִּי: <strong>צֹפֶן הַמַּכַּבִּים</strong>.</p>
             <p>הַבִּיטוּ בִּכְתָב הָעַתִּיק שֶׁקִּבַּלְתֶּם, וְנַסּוּ לְפַעְנֵחַ אֶת הַמֶּסֶר הַמִּסְתַּתֵּר בַּתְּמוּנָה!</p>
-
             <div class="challenge-box">
                 <h2>צֹפֶן הַמַּכַּבִּים</h2>
                 <div class="image-container">
@@ -77,7 +76,7 @@
         const CORRECT_sentence_NO_SPACES = "כלאחדהואאורקטןוכולנואוראיתן";
         const FULL_CORRECT_SENTENCE = "כָּל אֶחָד הוּא אוֹר קָטָן וְכֻלָּנוּ אוֹר אֵיתָן";
 
-        // השם המדויק של הקובץ של חדר 3
+        // הניתוב לעמוד הבא – בדיוק כמו שביקשת
         const NEXT_LEVEL_FILE = 'new_edit3.html';
 
         document.getElementById('submitLocation').addEventListener('click', () => {
@@ -87,14 +86,14 @@
             feedback.classList.remove('show', 'correct', 'incorrect');
 
             setTimeout(() => {
-                const cleanInput = userInput.replace(/\s/g, ''); // מסיר את כל הרווחים
+                const cleanInput = userInput.replace(/\s/g, '');
 
                 if (cleanInput === CORRECT_sentence_NO_SPACES) {
                     feedback.innerHTML = `פִּעְנוּחַ הַצּוֹפֶן הִצְלִיחַ!<br><strong>${FULL_CORRECT_SENTENCE}</strong>`;
                     feedback.className = 'correct show';
 
                     setTimeout(() => {
-                        window.location.href = new_edit3.html;
+                        window.location.href = NEXT_LEVEL_FILE; // מעביר ל-new_edit3.html
                     }, 2500);
                 } else {
                     feedback.innerHTML = "נַסּוּ שׁוּב. הַקְפִּידוּ עַל אִיּוּת מְדֻיָּק!";
@@ -103,7 +102,6 @@
             }, 100);
         });
 
-        // אפשר גם ללחוץ Enter בשדה הטקסט
         document.getElementById('locationInput').addEventListener('keypress', e => {
             if (e.key === 'Enter') {
                 document.getElementById('submitLocation').click();
@@ -112,4 +110,3 @@
     </script>
 </body>
 </html>
-
