@@ -70,7 +70,6 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
         }
 
-        /* רשת הקלפים */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -79,7 +78,6 @@
             margin: 40px 0;
         }
 
-        /* עיצוב קלף */
         .card {
             height: 140px;
             position: relative;
@@ -92,12 +90,10 @@
             transform: scale(1.05);
         }
 
-        /* קלף שנפתח */
         .card.flipped {
             transform: rotateY(180deg);
         }
         
-        /* קלף שנמצא (תואם) - נעלם */
         .card.match {
             visibility: hidden;
             opacity: 0;
@@ -119,7 +115,6 @@
             box-sizing: border-box;
         }
 
-        /* גב הקלף (הצד הסגור) */
         .card-back {
             background: linear-gradient(135deg, #3E2723, #5D4037);
             color: #FFD700;
@@ -136,7 +131,6 @@
             content: '';
         }
 
-        /* פנים הקלף (הצד הפתוח) */
         .card-front {
             background: linear-gradient(135deg, rgba(68, 68, 68, 0.95), rgba(51, 51, 51, 0.95));
             color: #FFFAEC;
@@ -149,7 +143,6 @@
             padding: 15px;
         }
         
-        /* משוב */
         #feedback {
             margin-top: 40px;
             font-size: 1.8em;
@@ -161,30 +154,49 @@
             border-radius: 15px;
             border: 2px solid rgba(255, 215, 0, 0.3);
         }
-        
-        #restart-button {
-            background: linear-gradient(135deg, #CC9900, #FFD700);
-            color: #1a1a2e;
-            border: none;
-            padding: 18px 50px;
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-top: 25px;
-            border-radius: 50px;
-            cursor: pointer;
+
+        /* כפתור מנהל סודי */
+        .admin-panel {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #FF0000;
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 1000;
             display: none;
-            transition: all 0.4s;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
-            font-family: 'Heebo', sans-serif;
         }
 
-        #restart-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.7);
+        .admin-panel.show {
+            display: block;
         }
 
-        #restart-button:active {
-            transform: scale(0.95);
+        .admin-panel input {
+            padding: 8px;
+            font-size: 1em;
+            border: 2px solid #FF0000;
+            border-radius: 5px;
+            background: #000;
+            color: #FF0000;
+            text-align: center;
+            width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .admin-panel button {
+            background: #FF0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .admin-panel button:hover {
+            background: #CC0000;
         }
 
         @media (max-width: 1024px) {
@@ -240,10 +252,20 @@
         <div class="cards-grid" id="cards-grid"></div>
 
         <div id="feedback">...מְחַכִּים לַקְּלָף הָרִאשׁוֹן...</div>
-        <button id="restart-button">הַתְחִילוּ מִשְׂחָק חָדָשׁ</button>
+    </div>
+
+    <!-- פאנל מנהל סודי -->
+    <div class="admin-panel" id="adminPanel">
+        <input type="password" id="adminCode" placeholder="קוד מנהל">
+        <button onclick="checkAdminCode()">דלג לעמוד הבא</button>
     </div>
 
     <script>
+        // הגדרות - שני כאן את שם הקובץ הבא!
+        const REPO_NAME = 'hanukkah-escape19';
+        const NEXT_PAGE = 'new_edit4.html';
+        const ADMIN_CODE = 'admin123'; // שני את הקוד הזה למה שאת רוצה!
+
         const cardPairs = [
             { id: 1, content: "פַּךְ קָטָן" },
             { id: 1, content: "הִסְפִּיק לִשְׁמוֹנָה יָמִים בִּלְבַד" },
@@ -267,7 +289,7 @@
             { id: 10, content: "פִּיּוּט הַנֶּאֱמָר לְאַחַר הַהַדְלָקָה" },
             { id: 11, content: "מַכַּבִּים" }, 
             { id: 11, content: "הַכִּנּוּי שֶׁל לוֹחֲמֵי הַמֶּרֶד" }, 
-            { id: 12, content: "בֵּית הַמִּקְדָּשׁ" }, // תוקן לרבים, אך תוכן ההתאמה תומך גם ביחיד
+            { id: 12, content: "בֵּית הַמִּקְדָּשׁ" },
             { id: 12, content: "הַמָּקוֹם בּוֹ נִמְצָא פַּךְ הַשֶּׁמֶן" },
             { id: 13, content: "לְבִיבָה" },
             { id: 13, content: "מַאֲכָל מְטֻגָּן הַנֶּאֱכָל בֶּחָג" },
@@ -284,7 +306,6 @@
         const totalMatches = cardPairs.length / 2;
         const gridElement = document.getElementById('cards-grid');
         const feedbackElement = document.getElementById('feedback');
-        const restartButton = document.getElementById('restart-button');
 
         function shuffle(array) {
             let currentIndex = array.length, randomIndex;
@@ -303,7 +324,6 @@
             lockBoard = false;
             matchesFound = 0;
             feedbackElement.textContent = '...מְחַכִּים לַקְּלָף הָרִאשׁוֹן...';
-            restartButton.style.display = 'none';
 
             const cardsArray = shuffle([...cardPairs]); 
             gridElement.innerHTML = '';
@@ -366,8 +386,17 @@
                 resetBoard();
                 
                 if (matchesFound === totalMatches) {
-                    feedbackElement.innerHTML = `🎉 כָּל הַכָּבוֹד! מְצָאתֶם אֶת כָּל ${totalMatches} הַזֻּוּגוֹת!`;
-                    restartButton.style.display = 'block';
+                    feedbackElement.innerHTML = `🎉 כָּל הַכָּבוֹד! מְצָאתֶם אֶת כָּל ${totalMatches} הַזֻּוּגוֹת! עוֹבְרִים לְחֶדֶר הַבָּא...`;
+                    
+                    // מעבר אוטומטי לעמוד הבא אחרי 3 שניות
+                    setTimeout(() => {
+                        const isGithubPages = window.location.hostname.includes('github.io');
+                        if (isGithubPages) {
+                            window.location.href = '/' + REPO_NAME + '/' + NEXT_PAGE;
+                        } else {
+                            window.location.href = NEXT_PAGE;
+                        }
+                    }, 3000);
                 } else {
                     feedbackElement.textContent = `✅ נִמְצָא זוג! נוֹתְרוּ עוֹד ${totalMatches - matchesFound} זֻוּגוֹת.`;
                 }
@@ -387,7 +416,40 @@
             [firstCard, secondCard, lockBoard] = [null, null, false];
         }
 
-        restartButton.addEventListener('click', createBoard);
+        // פונקציה לפתיחת פאנל המנהל (הקש Ctrl+Shift+A)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                const panel = document.getElementById('adminPanel');
+                panel.classList.toggle('show');
+            }
+        });
+
+        // בדיקת קוד מנהל
+        function checkAdminCode() {
+            const code = document.getElementById('adminCode').value;
+            if (code === ADMIN_CODE) {
+                const isGithubPages = window.location.hostname.includes('github.io');
+                if (isGithubPages) {
+                    window.location.href = '/' + REPO_NAME + '/' + NEXT_PAGE;
+                } else {
+                    window.location.href = new_edit4.html;
+                }
+            } else {
+                alert('קוד שגוי!');
+            }
+        }
+
+        // אפשרות ללחוץ Enter בשדה הקוד
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminInput = document.getElementById('adminCode');
+            if (adminInput) {
+                adminInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        checkAdminCode();
+                    }
+                });
+            }
+        });
 
         createBoard();
     </script>
