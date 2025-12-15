@@ -162,21 +162,31 @@
             transform: scale(0.95);
         }
         
-        /* משוב סופי */
+        /* **משוב סופי - התיקונים כאן** */
         #feedback {
             margin-top: 30px;
             font-weight: bold;
             font-size: 1.6em;
-            min-height: 40px;
             text-align: center;
-            padding: 20px;
             border-radius: 15px;
             opacity: 0;
-            transition: opacity 0.5s;
+            
+            /* **מבטיח שהאלמנט לא תופס מקום כשאינו בשימוש** */
+            height: 0; 
+            padding: 0;
+            min-height: 0;
+            
+            transition: all 0.5s ease-in-out;
+            /* הסרת ה-min-height הקבוע */
         }
 
         #feedback.show {
             opacity: 1;
+            /* **כשהוא מוצג, החזר את הגובה והריפוד הרצויים** */
+            height: auto;
+            padding: 20px;
+            min-height: 40px; 
+            
         }
         
         .correct {
@@ -379,6 +389,7 @@
         
         // שם הקובץ לשלב הבא
         const NEXT_LEVEL_FILE = 'חדר בריחה חנוכה 06.html'; 
+        const ENDING_GAME_FILE = 'ending_game.html'; // הוספת משתנה לשם קובץ הסיום
 
         // בדיקת כל התשובות בטופס
         document.getElementById('checkAll').addEventListener('click', () => {
@@ -405,6 +416,7 @@
                 if (userInput === '') {
                     unanswered++;
                     input.style.borderColor = 'red';
+                    allCorrect = false; // אם יש ריק, התוצאה לא נכונה
                 } else if (userInput === correctAnswer) {
                     // תשובה נכונה
                     input.closest('tr').classList.add('correct-answer-row');
@@ -423,21 +435,20 @@
                     feedbackElement.innerHTML = `❌ יֵשׁ לַעֲנוֹת עַל כָּל הַחִידוֹת! נוֹתְרוּ ${unanswered} חִידוֹת רֵיקוֹת.`;
                     feedbackElement.className = 'incorrect show';
                 } else if (allCorrect) {
-                    feedbackElement.innerHTML = `אַתֶּם נֶהֱדָרִים! כָּל 21 הַחִידוֹת נְכוֹנוֹת!`;
+                    feedbackElement.innerHTML = `אַתֶּם נֶהֱדָרִים! כָּל 21 הַחִידוֹת נְכוֹנוֹת! הַקּוֹד הַסּוֹפִי לַמַּעֲבָר הוּא: **${FINAL_SECRET_CODE}**`;
                     feedbackElement.className = 'correct show';
                     
-                    // מעבר אוטומטי לשלב הבא
+                    // מעבר אוטומטי לשלב הבא (קובץ הסיום)
                     setTimeout(() => {
-                        window.location.href = getPath(ending_game.html);
+                        window.location.href = getPath(ENDING_GAME_FILE);
                     }, 3000); 
 
                 } else {
-                    feedbackElement.innerHTML = `❌ **טְעֻיּוֹת!** נוֹתְרוּ ${incorrectCount} אֶהְמְמ... נִרְאֶה שֶׁטָּעִיתֶם, מַה שֶׁלֹּא נָכוֹן מְסֻמָּן בְּאָדֹם. נַסּוּ שׁוּב.`;
+                    feedbackElement.innerHTML = `❌ **טְעֻיּוֹת!** נִרְאֶה שֶׁטָּעִיתֶם ב-${incorrectCount} חִידוֹת, מַה שֶׁלֹּא נָכוֹן מְסֻמָּן בְּאָדֹם. נַסּוּ שׁוּב.`;
                     feedbackElement.className = 'incorrect show';
                 }
             }, 100);
         });
     </script>
 </body>
-
 </html>
