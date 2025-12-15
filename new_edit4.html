@@ -6,7 +6,7 @@
     <title>חדר מספר 4: קרב נגד המוח - מסע בעקבות החנוכה</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS נשאר ללא שינוי */
+        /* CSS כללי */
         * {
             margin: 0;
             padding: 0;
@@ -118,8 +118,6 @@
             border: 2px solid #CC9900;
             border-radius: 8px;
             transition: all 0.3s;
-            font-family: 'Heebo', sans-serif;
-            /* הוספת תמיכה בניקוד */
             font-family: 'Heebo', sans-serif; 
         }
 
@@ -135,13 +133,11 @@
             border-color: #28a745 !important;
             background-color: rgba(11, 46, 19, 0.8) !important;
         }
-
-        /* כפתור בדיקה */
-        #checkAll {
+        
+        /* כפתורים ומשוב */
+        #checkAll, #managerCheck {
             display: block;
-            margin: 40px auto 0;
-            background: linear-gradient(135deg, #CC9900, #FFD700);
-            color: #1a1a2e;
+            margin: 20px auto 10px;
             padding: 18px 50px;
             border: none;
             border-radius: 50px;
@@ -153,16 +149,53 @@
             font-family: 'Heebo', sans-serif;
         }
 
-        #checkAll:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.7);
-        }
-
-        #checkAll:active {
-            transform: scale(0.95);
+        /* כפתור בדיקת חידות */
+        #checkAll {
+            background: linear-gradient(135deg, #CC9900, #FFD700);
+            color: #1a1a2e;
         }
         
-        /* **משוב סופי - התיקונים כאן** */
+        #checkAll:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.7);
+        }
+        
+        /* אזור קוד מנהל */
+        .manager-area {
+            margin-top: 30px;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px dashed rgba(255, 215, 0, 0.3);
+        }
+        
+        #managerCodeInput {
+            width: 80%;
+            max-width: 300px;
+            padding: 10px;
+            font-size: 1.2em;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        #managerCheck {
+            background: linear-gradient(135deg, #444444, #666666);
+            color: #FFD700;
+            font-size: 1.2em;
+            padding: 10px 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        #managerCheck:hover {
+             transform: scale(1.05);
+             background: linear-gradient(135deg, #666666, #888888);
+        }
+        
+        /* משוב סופי */
         #feedback {
             margin-top: 30px;
             font-weight: bold;
@@ -170,23 +203,17 @@
             text-align: center;
             border-radius: 15px;
             opacity: 0;
-            
-            /* **מבטיח שהאלמנט לא תופס מקום כשאינו בשימוש** */
             height: 0; 
             padding: 0;
             min-height: 0;
-            
             transition: all 0.5s ease-in-out;
-            /* הסרת ה-min-height הקבוע */
         }
 
         #feedback.show {
             opacity: 1;
-            /* **כשהוא מוצג, החזר את הגובה והריפוד הרצויים** */
             height: auto;
             padding: 20px;
             min-height: 40px; 
-            
         }
         
         .correct {
@@ -202,7 +229,7 @@
             color: #FF7777;
             text-shadow: 0 0 10px rgba(139, 0, 0, 0.8);
         }
-
+        
         @media (max-width: 768px) {
             .quiz-container {
                 padding: 30px 20px;
@@ -251,112 +278,112 @@
                     <tr>
                         <td>א'</td>
                         <td>אֶחָד מִשְּׁמוֹת חַג הַחֲנֻכָּה:</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="אורים" placeholder="אֳוּרִים" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="אורים" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ב'</td>
                         <td>אֵיזוֹ מִצְוָה הַיְּוָנִים אָסְרוּ?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="בריתמילה" placeholder="בְּרִית מִילָה" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="בריתמילה" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ג'</td>
                         <td>פַּעַם הִדְלִיקוּ בְּאַבְנֵי צוּר וְהַיּוֹם בְּ...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="גפרורים" placeholder="גַּפְרוּרִים" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="גפרורים" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ד'</td>
                         <td>מִשְׁפַּחַת הַחַשְׁמוֹנָאִים הָיוּ מִזֶּרַע בֵּית</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="דוד" placeholder="דָּוִד" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="דוד" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ה'</td>
                         <td>בַּחֲנֻכָּה נִצַּחְנוּ אֶת...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="היוונים" placeholder="הַיְּוָנִים" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="היוונים" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ו'</td>
                         <td>הַיּוֹם הָאַחֲרוֹן שֶׁל חַג הַחֲנֻכָּה הוּא:</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="זאתחנוכה" placeholder="וְזֹאת חֲנֻכָּה" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="זאתחנוכה" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ז'</td>
                         <td>מִמֶּנּוּ עָשׂוּי הַשֶּׁמֶן בְּבֵית הַמִּקְדָּשׁ</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="זית" placeholder="זַּיִת" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="זית" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ח'</td>
                         <td>מִי אֵלּוּ שֶׁהוֹבִילוּ אֶת הַמֶּרֶד בַּיְּוָנִים?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="חשמונאים" placeholder="חַשְׁמוֹנָאִים" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="חשמונאים" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ט'</td>
                         <td>פַּךְ הַשֶּׁמֶן הַיְּחִידִי שֶׁמָּצְאוּ הָיָה...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="טהור" placeholder="טָהוֹר" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="טהור" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>י'</td>
                         <td>אֵיךְ קָרְאוּ לַמְּפַקֵּד בַּמִּלְחָמָה?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="יהודה" placeholder="יְהוּדָה" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="יהודה" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>כ'</td>
                         <td>תַּפְקִידוֹ שֶׁל מַתִּתְיָהוּ בְּבֵית הַמִּקְדָּשׁ</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="כהןגדול" placeholder="כֹּהֵן גָּדוֹל" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="כהןגדול" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ל'</td>
                         <td>מַה הַחַשְׁמוֹנָאִים הֶחְלִיטוּ?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="להילחם" placeholder="לְהִלָּחֵם" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="להילחם" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>מ'</td>
                         <td>מַנְהִיג הַמֶּרֶד?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="מתתיהו" placeholder="מַתִּתְיָהוּ" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="מתתיהו" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>נ'</td>
                         <td>עַל פִּי הַשִּׁיר הוּא דַּקִּיק</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="נר" placeholder="נֵר" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="נר" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ס'</td>
                         <td>אֶחָד מִמַּאֲכְלֵי הַחֲנֻכָּה</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="סופגניה" placeholder="סֻפְגָּנִיָּה" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="סופגניה" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ע'</td>
                         <td>מִי הָיוּ הַצָּבָא הֶחָלָשׁ?</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="עםישראל" placeholder="עַם יִשְׂרָאֵל" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="עםישראל" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>פ'</td>
                         <td>מַטְּרַת הַדְלָקַת הַחֲנֻכִּיָּה</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="פרסוםהנס" placeholder="פִּרְסוּם הַנֵּס" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="פרסוםהנס" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>צ'</td>
                         <td>רְשָׁעִים בְּיַד...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="צדיקים" placeholder="צַדִּיקִים" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="צדיקים" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ק'</td>
                         <td>בַּמְּנוֹרָה שֶׁל בֵּית הַמִּקְדָּשׁ הָיוּ שִׁבְעָה...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="קנים" placeholder="קָנִים" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="קנים" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ר'</td>
                         <td>מַנִּיחִים אֶת הַחֲנֻכִּיָּה סָמוּךְ לְ...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="רחוב" placeholder="רְחוֹב" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="רחוב" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ש'</td>
                         <td>בְּחוּץ לָאָרֶץ כָּתוּב: נֵס גָּדוֹל הָיָה...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="שם" placeholder="שָׁם" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="שם" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ת'</td>
                         <td>וְעַל הַגְּבוּרוֹת וְעַל הַ...</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="תשועות" placeholder="תְּשׁוּעוֹת" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="תשועות" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                 </tbody>
             </table>
@@ -364,34 +391,73 @@
 
         <button type="button" id="checkAll">🤠לַחֲצוּ עָלַי אִם אַתֶּם חוֹשְׁבִים שֶׁאַתֶּם יוֹדְעִים🤠</button>
         
+        <div class="manager-area">
+             <input type="password" id="managerCodeInput" placeholder="קוד מנהל" maxlength="10">
+             <button type="button" id="managerCheck">בדיקת קוד מנהל</button>
+        </div>
+        
         <div id="feedback"></div>
     </div>
 
     <script>
         // *******************************************************************
-        // ** הגדרות ניתוב ו-GitHub Pages (אופציונלי)
-        // אם אתה מעלה לאתר רגיל, השאר את זה ככה
+        // ** הגדרות כלליות
+        // *******************************************************************
         const REPO_NAME = 'hanukkah-escape'; 
         const isGithubPages = window.location.hostname.endsWith('github.io');
 
         function getPath(fileName) {
             if (isGithubPages) {
-                // נתיב יחסי ל-GitHub Pages
                 return `/${REPO_NAME}/${fileName}`; 
             }
-            // נתיב רגיל
             return fileName; 
         }
-        // *******************************************************************
         
-        // הקוד הסודי שמתקבל אם כל החידות נכונות (לצורך המעבר לשלב הבא)
+        // קודים סודיים
         const FINAL_SECRET_CODE = "נִפְתְּרָהַמַּעֲבָר";
+        const MANAGER_CODE = "סופגניה8"; // *** קוד המנהל
         
-        // שם הקובץ לשלב הבא
-        const NEXT_LEVEL_FILE = 'חדר בריחה חנוכה 06.html'; 
-        const ENDING_GAME_FILE = 'ending_game.html'; // הוספת משתנה לשם קובץ הסיום
+        // שמות הקבצים
+        const ENDING_GAME_FILE = 'ending_game.html'; 
+        
+        // פונקציה לטיפול במעבר לשלב הבא
+        function proceedToNextLevel(message) {
+            const feedbackElement = document.getElementById('feedback');
+            feedbackElement.innerHTML = message;
+            feedbackElement.className = 'correct show';
+            
+            setTimeout(() => {
+                window.location.href = getPath(ENDING_GAME_FILE);
+            }, 3000); 
+        }
 
-        // בדיקת כל התשובות בטופס
+        // *******************************************************************
+        // ** 1. בדיקת קוד מנהל
+        // *******************************************************************
+        document.getElementById('managerCheck').addEventListener('click', () => {
+            const codeInput = document.getElementById('managerCodeInput');
+            const feedbackElement = document.getElementById('feedback');
+            
+            // נירמול הקלט
+            const enteredCode = codeInput.value.trim();
+
+            // הסתרת משוב קודם
+            feedbackElement.classList.remove('show', 'correct', 'incorrect');
+            
+            setTimeout(() => {
+                if (enteredCode === MANAGER_CODE) {
+                    proceedToNextLevel(`✅ קוד המנהל נכון! עוברים לשלב הסיום...`);
+                } else {
+                    feedbackElement.innerHTML = `❌ קוד מנהל שגוי. נסו את קוד המעבר הרגיל.`;
+                    feedbackElement.className = 'incorrect show';
+                }
+            }, 100);
+        });
+
+
+        // *******************************************************************
+        // ** 2. בדיקת חידות רגילה
+        // *******************************************************************
         document.getElementById('checkAll').addEventListener('click', () => {
             const inputs = document.querySelectorAll('.answer-input');
             const feedbackElement = document.getElementById('feedback');
@@ -416,7 +482,7 @@
                 if (userInput === '') {
                     unanswered++;
                     input.style.borderColor = 'red';
-                    allCorrect = false; // אם יש ריק, התוצאה לא נכונה
+                    allCorrect = false; 
                 } else if (userInput === correctAnswer) {
                     // תשובה נכונה
                     input.closest('tr').classList.add('correct-answer-row');
@@ -435,14 +501,8 @@
                     feedbackElement.innerHTML = `❌ יֵשׁ לַעֲנוֹת עַל כָּל הַחִידוֹת! נוֹתְרוּ ${unanswered} חִידוֹת רֵיקוֹת.`;
                     feedbackElement.className = 'incorrect show';
                 } else if (allCorrect) {
-                    feedbackElement.innerHTML = `אַתֶּם נֶהֱדָרִים! כָּל 21 הַחִידוֹת נְכוֹנוֹת! הַקּוֹד הַסּוֹפִי לַמַּעֲבָר הוּא: **${FINAL_SECRET_CODE}**`;
-                    feedbackElement.className = 'correct show';
-                    
-                    // מעבר אוטומטי לשלב הבא (קובץ הסיום)
-                    setTimeout(() => {
-                        window.location.href = getPath(ENDING_GAME_FILE);
-                    }, 3000); 
-
+                    const successMessage = `אַתֶּם נֶהֱדָרִים! כָּל 21 הַחִידוֹת נְכוֹנוֹת! הַקּוֹד הַסּוֹפִי לַמַּעֲבָר הוּא: **${FINAL_SECRET_CODE}**`;
+                    proceedToNextLevel(successMessage);
                 } else {
                     feedbackElement.innerHTML = `❌ **טְעֻיּוֹת!** נִרְאֶה שֶׁטָּעִיתֶם ב-${incorrectCount} חִידוֹת, מַה שֶׁלֹּא נָכוֹן מְסֻמָּן בְּאָדֹם. נַסּוּ שׁוּב.`;
                     feedbackElement.className = 'incorrect show';
