@@ -278,19 +278,20 @@
 
             border: 2px solid rgba(255, 215, 0, 0.3);
 
+            margin-bottom: 60px; /* מרווח לפני הפאנל החדש */
+
         }
 
-        /* כפתור מנהל סודי */
+        /* **שינוי: הגדרת הפאנל שיופיע תמיד בתחתית הדף כחלק מהתוכן** */
 
         .admin-panel {
 
-            position: fixed;
-
-            bottom: 20px;
-            /* **שינוי כאן: ממקם בצד ימין** */
-            right: 20px; 
-            /* **הסרנו את left: 20px;** */
+            /* הסרנו: position: fixed; bottom, left/right */
             
+            margin: 40px auto 0; /* מרכוז + מרווח עליון */
+
+            max-width: 400px; /* הגבלת רוחב */
+
             background: rgba(0, 0, 0, 0.9);
 
             border: 2px solid #FF0000;
@@ -301,15 +302,23 @@
 
             z-index: 1000;
 
-            display: none;
+            display: flex; /* ארגון פנימי */
 
+            flex-direction: column;
+
+            align-items: center; /* ריכוז פריטים */
+            
+            /* הסרנו: display: none; */
         }
+
+        /* **הסרנו: .admin-panel.show** כי הוא גלוי תמיד
 
         .admin-panel.show {
 
             display: block;
 
         }
+        */
 
         .admin-panel input {
 
@@ -327,7 +336,7 @@
 
             text-align: center;
 
-            width: 150px;
+            width: 100%; /* שינוי: תופס את כל רוחב הפאנל */
 
             margin-bottom: 10px;
 
@@ -417,6 +426,12 @@
 
             }
 
+            .admin-panel {
+
+                max-width: 90%; /* יתאים למסכים קטנים יותר */
+
+            }
+
         }
 
         @media (max-width: 480px) {
@@ -501,7 +516,7 @@
 
             { id: 9, content: "דְּמֵי חֲנֻכָּה" },
 
-            { id: 9, content: "מִנְהָג שֶׁנּוֹצַר כְּדֵי לְעוֹדֵד לִמּוּד צְדָקָה" },
+            { id: 9, content: "מִנְהָג שֶׁנּוֹצָר כְּדֵי לְעוֹדֵד לִמּוּד צְדָקָה" },
 
             { id: 10, content: "מָעוֹז צוּר" },
 
@@ -731,7 +746,9 @@
 
         }
 
-        // פונקציה לפתיחת פאנל המנהל (הקש Ctrl+Shift+A)
+        // **הסרת הפונקציה לפתיחת פאנל המנהל (Ctrl+Shift+A)**
+
+        /*
 
         document.addEventListener('keydown', function(e) {
 
@@ -744,6 +761,8 @@
             }
 
         });
+
+        */
 
         // בדיקת קוד מנהל
 
