@@ -303,7 +303,7 @@
                     <tr>
                         <td>ו'</td>
                         <td>הַיּוֹם הָאַחֲרוֹן שֶׁל חַג הַחֲנֻכָּה הוּא:</td>
-                        <td><input type="text" class="answer-input" data-correct-answer="וזאתחנוכה" placeholder="הַקְלֵד כָּאן" required></td>
+                        <td><input type="text" class="answer-input" data-correct-answer="זאתחנוכה" placeholder="הַקְלֵד כָּאן" required></td>
                     </tr>
                     <tr>
                         <td>ז'</td>
@@ -445,13 +445,13 @@
 
             inputs.forEach(input => {
                 const userInput = input.value.trim().replace(/\s/g, '').toLowerCase().replace(/[\u0591-\u05BD\u05BF-\u05C7]/g, ""); 
-                const correctAnswer = input.dataset.correctAnswer.toLowerCase();
+                const correctAnswers = input.dataset.correctAnswer.toLowerCase().split('|');
 
                 if (userInput === '') {
                     unanswered++;
                     input.style.borderColor = 'red';
                     allCorrect = false; 
-                } else if (userInput === correctAnswer) {
+                } else if (correctAnswers.includes(userInput)) {
                     input.closest('tr').classList.add('correct-answer-row');
                     input.style.borderColor = '#28a745';
                 } else {
@@ -478,4 +478,3 @@
     </script>
 </body>
 </html>
-
