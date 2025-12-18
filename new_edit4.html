@@ -400,64 +400,35 @@
     </div>
 
     <script>
-        // *******************************************************************
-        // ** הגדרות כלליות
-        // *******************************************************************
-        const REPO_NAME = 'hanukkah-escape'; 
-        const isGithubPages = window.location.hostname.endsWith('github.io');
-
-        function getPath(fileName) {
-            if (isGithubPages) {
-                return `/${REPO_NAME}/${fileName}`; 
-            }
-            return fileName; 
-        }
+        // קוד מנהל
+        const MANAGER_CODE = "admin1234";
         
-        // קודים סודיים
-        const FINAL_SECRET_CODE = "נִפְתְּרָהַמַּעֲבָר";
-        const MANAGER_CODE = "סופגניה8"; // *** קוד המנהל
-        
-        // שמות הקבצים
-        const ENDING_GAME_FILE = 'ending_game.html'; 
-        
-        // פונקציה לטיפול במעבר לשלב הבא
-        function proceedToNextLevel(message) {
-            const feedbackElement = document.getElementById('feedback');
-            feedbackElement.innerHTML = message;
-            feedbackElement.className = 'correct show';
-            
-            setTimeout(() => {
-                window.location.href = getPath(ENDING_GAME_FILE);
-            }, 3000); 
+        // פונקציה למעבר לעמוד הבא
+        function goToNextPage() {
+            window.location.href = 'ending_game.html';
         }
 
-        // *******************************************************************
-        // ** 1. בדיקת קוד מנהל
-        // *******************************************************************
+        // בדיקת קוד מנהל
         document.getElementById('managerCheck').addEventListener('click', () => {
             const codeInput = document.getElementById('managerCodeInput');
             const feedbackElement = document.getElementById('feedback');
-            
-            // נירמול הקלט
             const enteredCode = codeInput.value.trim();
 
-            // הסתרת משוב קודם
             feedbackElement.classList.remove('show', 'correct', 'incorrect');
             
             setTimeout(() => {
                 if (enteredCode === MANAGER_CODE) {
-                    proceedToNextLevel(`✅ קוד המנהל נכון! עוברים לשלב הסיום...`);
+                    feedbackElement.innerHTML = `✅ קוד המנהל נכון! עוברים לשלב הסיום...`;
+                    feedbackElement.className = 'correct show';
+                    setTimeout(goToNextPage, 2000);
                 } else {
-                    feedbackElement.innerHTML = `❌ קוד מנהל שגוי. נסו את קוד המעבר הרגיל.`;
+                    feedbackElement.innerHTML = `❌ קוד מנהל שגוי. נסו שוב.`;
                     feedbackElement.className = 'incorrect show';
                 }
             }, 100);
         });
 
-
-        // *******************************************************************
-        // ** 2. בדיקת חידות רגילה
-        // *******************************************************************
+        // בדיקת חידות רגילה
         document.getElementById('checkAll').addEventListener('click', () => {
             const inputs = document.querySelectorAll('.answer-input');
             const feedbackElement = document.getElementById('feedback');
@@ -465,46 +436,41 @@
             let unanswered = 0;
             let incorrectCount = 0;
             
-            // הסרת הקלאס show
             feedbackElement.classList.remove('show', 'correct', 'incorrect');
             
-            // איפוס סגנונות
             inputs.forEach(input => {
                 input.closest('tr').classList.remove('correct-answer-row');
-                input.style.borderColor = '#CC9900'; // איפוס לצבע ברירת מחדל
+                input.style.borderColor = '#CC9900';
             });
 
             inputs.forEach(input => {
-                // נירמול הקלט: הסרת רווחים, המרת הכל לאותיות קטנות, והסרת ניקוד (אם היה)
                 const userInput = input.value.trim().replace(/\s/g, '').toLowerCase().replace(/[\u0591-\u05BD\u05BF-\u05C7]/g, ""); 
-                const correctAnswer = input.dataset.correctAnswer.toLowerCase(); // נירמול התשובה הנכונה
+                const correctAnswer = input.dataset.correctAnswer.toLowerCase();
 
                 if (userInput === '') {
                     unanswered++;
                     input.style.borderColor = 'red';
                     allCorrect = false; 
                 } else if (userInput === correctAnswer) {
-                    // תשובה נכונה
                     input.closest('tr').classList.add('correct-answer-row');
                     input.style.borderColor = '#28a745';
                 } else {
-                    // תשובה שגויה
                     allCorrect = false;
                     incorrectCount++;
                     input.style.borderColor = 'red';
                 }
             });
 
-            // הצגת משוב סופי
             setTimeout(() => {
                 if (unanswered > 0) {
                     feedbackElement.innerHTML = `❌ יֵשׁ לַעֲנוֹת עַל כָּל הַחִידוֹת! נוֹתְרוּ ${unanswered} חִידוֹת רֵיקוֹת.`;
                     feedbackElement.className = 'incorrect show';
                 } else if (allCorrect) {
-                    const successMessage = `אַתֶּם נֶהֱדָרִים! כָּל 21 הַחִידוֹת נְכוֹנוֹת! הַקּוֹד הַסּוֹפִי לַמַּעֲבָר הוּא: **${FINAL_SECRET_CODE}**`;
-                    proceedToNextLevel(successMessage);
+                    feedbackElement.innerHTML = `✅ אַתֶּם נֶהֱדָרִים! כָּל 21 הַחִידוֹת נְכוֹנוֹת! עוברים לשלב הבא...`;
+                    feedbackElement.className = 'correct show';
+                    setTimeout(goToNextPage, 2000);
                 } else {
-                    feedbackElement.innerHTML = `❌ **טְעֻיּוֹת!** נִרְאֶה שֶׁטָּעִיתֶם ב-${incorrectCount} חִידוֹת, מַה שֶׁלֹּא נָכוֹן מְסֻמָּן בְּאָדֹם. נַסּוּ שׁוּב.`;
+                    feedbackElement.innerHTML = `❌ טְעֻיּוֹת! נִרְאֶה שֶׁטָּעִיתֶם ב-${incorrectCount} חִידוֹת, מַה שֶׁלֹּא נָכוֹן מְסֻמָּן בְּאָדֹם. נַסּוּ שׁוּב.`;
                     feedbackElement.className = 'incorrect show';
                 }
             }, 100);
